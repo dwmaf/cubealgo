@@ -49,10 +49,10 @@ const isPBL = computed(() => props.type === 'PBL')
 
 const colors = {
     yellow: '#ffff00',
-    red: '#ef4444',
-    orange: '#f97316',
-    blue: '#3b82f6',
-    green: '#22c55e',
+    red: '#d00000',
+    orange: '#ee8800',
+    blue: '#2040d0',
+    green: '#11aa00',
     blank: '#1e293b'
 }
 

@@ -19,18 +19,17 @@
             <div class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="pll in pllAlgorithms" :key="pll.name"
                     class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
-                    <div class="flex flex-col gap-2 flex-shrink-0">
+                    <div
+                        class="flex-shrink-0 relative w-[98px] h-[98px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1">
+                        <CubeIcon3x3 :caseId="pll.name" type="PLL" />
+                    </div>
+                    <!-- <div class="">
                         <div
                             class="relative w-[80px] h-[80px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10">
                             <img :src="`/3x3pll/${pll.name}.png`" :alt="`PLL ${pll.name}`"
                                 class="w-full h-full object-contain p-2" loading="lazy" />
                         </div>
-                        <div
-                            class="relative w-[80px] h-[80px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-[10px] text-slate-500 pt-1 flex-col">
-                            <CubeIcon3x3 :caseId="pll.name" type="PLL" />
-                            <span class="mb-1">SVG</span>
-                        </div>
-                    </div>
+                    </div> -->
                     <div class="flex-1 min-w-0">
                         <h4 class="text-sm font-semibold text-white mb-2">{{ pll.name }} Perm</h4>
                         <div

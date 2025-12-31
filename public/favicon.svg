@@ -1,0 +1,22 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background rounded corner (optional, for better visibility) -->
+    <rect width="120" height="120" rx="20" fill="#0f172a"/>
+    
+    <g transform="translate(15, 15)">
+        <!-- Top Face (Yellowish) -->
+        <rect x="0" y="0" width="28" height="28" rx="4" fill="#fbbf24"/>
+        <rect x="31" y="0" width="28" height="28" rx="4" fill="#fbbf24"/>
+        <rect x="62" y="0" width="28" height="28" rx="4" fill="#fbbf24"/>
+        
+        <rect x="0" y="31" width="28" height="28" rx="4" fill="#fbbf24"/>
+        <rect x="31" y="31" width="28" height="28" rx="4" fill="#fbbf24"/>
+        <rect x="62" y="31" width="28" height="28" rx="4" fill="#fbbf24"/>
+        
+        <rect x="0" y="62" width="28" height="28" rx="4" fill="#fbbf24"/>
+        <rect x="31" y="62" width="28" height="28" rx="4" fill="#fbbf24"/>
+        <rect x="62" y="62" width="28" height="28" rx="4" fill="#fbbf24"/>
+        
+        <!-- Subtle Indigo borders to match your theme -->
+        <rect x="0" y="0" width="90" height="90" rx="6" fill="none" stroke="#6366f1" stroke-width="1" opacity="0.3"/>
+    </g>
+</svg>

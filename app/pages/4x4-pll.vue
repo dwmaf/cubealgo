@@ -27,13 +27,10 @@
             <div class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="algo in pllParityAlgorithms" :key="algo.name"
                     class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
-                    <!-- Image Container - Left Side -->
                     <div
-                        class="relative flex-shrink-0 w-[100px] h-[100px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10">
-                        <img :src="`/4x4pll/${algo.image}.png`" :alt="`4x4 PLL ${algo.name}`"
-                            class="w-full h-full object-contain p-2" loading="lazy" />
+                        class="flex-shrink-0 relative w-[100px] h-[100px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1">
+                        <CubeIcon4x4 :caseId="algo.name" type="PLL" />
                     </div>
-                    <!-- Content - Right Side -->
                     <div class="flex-1 min-w-0">
                         <h4 class="text-sm font-semibold text-white mb-1">{{ algo.name }}</h4>
 
@@ -54,10 +51,16 @@
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div
                     class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
+                    <!-- <div class="flex flex-col gap-2 flex-shrink-0">
+                        <div
+                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
+                            <img :src="`/movenotation/r.png`" alt="gambar belum ada"
+                                class="w-full h-full object-contain" />
+                        </div>
+                    </div> -->
                     <div
-                        class="min-w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                        <img :src="`/movenotation/r.png`" alt="gambar belum ada"
-                            class="w-full h-full object-contain" />
+                        class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden text-slate-500">
+                        <CubeIcon3D notation="2R" size="4" />
                     </div>
                     <div>
                         <h4 class="text-base font-semibold mb-1 text-white">2R

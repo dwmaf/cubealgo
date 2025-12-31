@@ -37,7 +37,7 @@
                     </div>
                     <span
                         class="inline-block py-1 px-3 mb-3 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-500">3x3</span>
-                    <h3 class="text-xl font-bold mb-3 text-white">OLL - Orientation of Last Layer</h3>
+                    <h3 class="text-xl font-bold mb-3 text-white">3x3 OLL - Orientation of Last Layer</h3>
                     <p class="text-sm text-slate-400 mb-4">Algoritma untuk mengorientasikan semua stiker kuning di
                         layer teratas.</p>
                     <div class="flex items-center gap-4 text-sm text-slate-500">
@@ -55,7 +55,7 @@
                     </div>
                     <span
                         class="inline-block py-1 px-3 mb-3 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-500">3x3</span>
-                    <h3 class="text-xl font-bold mb-3 text-white">PLL - Permutation of Last Layer</h3>
+                    <h3 class="text-xl font-bold mb-3 text-white">3x3 PLL - Permutation of Last Layer</h3>
                     <p class="text-sm text-slate-400 mb-4">Algoritma untuk memposisikan semua piece di layer teratas
                         dengan benar.</p>
                     <div class="flex items-center gap-4 text-sm text-slate-500">
@@ -115,10 +115,16 @@
                 <div v-for="notation in basicNotations" :key="notation.symbol"
                     class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
                     <div
-                        class="min-w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                        <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
-                            class="w-full h-full object-contain" />
+                        class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
+                        <CubeIcon3D :notation="notation.symbol" />
                     </div>
+                    <!-- <div class="">
+                        <div
+                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
+                            <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
+                                class="w-full h-full object-contain" />
+                        </div>
+                    </div> -->
                     <div>
                         <h4 class="text-base font-semibold mb-1 text-white">{{ notation.symbol }}
                         </h4>
@@ -139,10 +145,16 @@
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="notation in wideNotations" :key="notation.symbol"
                     class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
+                    <!-- <div class="flex flex-col gap-2 flex-shrink-0">
+                        <div
+                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
+                            <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
+                                class="w-full h-full object-contain" />
+                        </div>
+                    </div> -->
                     <div
-                        class="min-w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                        <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
-                            class="w-full h-full object-contain" />
+                        class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
+                        <CubeIcon3D :notation="notation.symbol" />
                     </div>
                     <div>
                         <h4 class="text-base font-semibold mb-1 text-white">{{ notation.symbol }}
@@ -164,10 +176,16 @@
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="notation in rotationNotations" :key="notation.symbol"
                     class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
+                    <!-- <div class="flex flex-col gap-2 ">
+                        <div
+                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
+                            <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
+                                class="w-full h-full object-contain" />
+                        </div>
+                    </div> -->
                     <div
-                        class="min-w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                        <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
-                            class="w-full h-full object-contain" />
+                        class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
+                        <CubeIcon3D :notation="notation.symbol" />
                     </div>
                     <div>
                         <h4 class="text-base font-semibold mb-1 text-white">{{ notation.symbol }}
@@ -196,10 +214,10 @@
                 <div v-for="algo in lastTwoEdgeAlgorithms" :key="algo.name"
                     class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
                     <div
-                        class="relative flex-shrink-0 w-[80px] h-[80px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                        <img :src="`/movenotation/${algo.image}.png`" :alt="algo.name"
-                            class="w-full h-full object-contain" />
+                        class="flex-shrink-0 relative w-[80px] h-[80px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden text-slate-500">
+                        <CubeIcon4x4 :caseId="algo.name" type="Notation" />
                     </div>
+                    
                     <div class="flex-1 min-w-0">
                         <h4 class="text-sm font-semibold mb-2 text-white">{{ algo.name }}</h4>
                         <div
@@ -247,6 +265,6 @@ const rotationNotations = [
 ]
 
 const lastTwoEdgeAlgorithms = [
-    { id: '1', image: "last2pair", name: 'Last Edge Pair', algorithm: "Uw R U R' U y L' U' L Uw" },
+    { id: '1', image: "last2pair", name: 'Last Edge Pair', algorithm: "Uw' R U R' U y L' U' L Uw" },
 ]
 </script>
