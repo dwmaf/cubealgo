@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-6">
+    <div class="w-full max-w-7xl mx-auto px-2">
         <section class="py-16 pb-12 text-center">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
                 3x3 <span class="text-gradient">OLL</span> Algorithms
@@ -12,34 +12,121 @@
 
         <section class="py-12">
             <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-                <h2
-                    class="relative pl-4 text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
-                    All OLL Cases</h2>
+                <div class="flex flex-col gap-4 ml-4">
+                    <h2
+                        class="relative text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
+                        {{ sortBy === 'number' ? 'All OLL Cases' : 'Grouped by Shape' }}</h2>
+                    <span
+                        class="w-fit text-xs font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">57
+                        Algorithms</span>
+                </div>
+
+
+                <div class="flex bg-slate-800/50 ml-4 p-1 rounded-xl border border-slate-700/50">
+                    <button @click="sortBy = 'number'"
+                        :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:text-white']"
+                        class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
+                        By Number
+                    </button>
+                    <button @click="sortBy = 'shape'"
+                        :class="[sortBy === 'shape' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:text-white']"
+                        class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
+                        By Shape
+                    </button>
+                </div>
             </div>
 
-            <div class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div v-if="sortBy === 'number'" class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="oll in ollAlgorithms" :key="oll.id"
                     class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
                     <div
                         class="flex-shrink-0 relative w-[98px] h-[98px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1 ">
                         <CubeIcon3x3 :caseId="oll.id" type="OLL" />
-                        
+
                     </div>
-                    <!-- <div class=" ">
-                        <div
-                            class="relative w-[80px] h-[80px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10">
-                            <img :src="`/3x3oll/${oll.id}.png`" :alt="`OLL Case ${oll.id}`"
-                                class="w-full h-full object-contain p-2" loading="lazy" />
+                    <div class="flex-1 space-y-2 min-w-0">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-base font-bold text-white">OLL {{ oll.id }}</h4>
                         </div>
-                    </div> -->
-                    <div class="flex-1 min-w-0">
-                        <h4 class="text-sm font-semibold text-white mb-2">OLL {{ oll.id }}</h4>
+
+                        <div v-if="oll.setup === 'Same as Algo'"
+                            class="flex items-center gap-2 bg-indigo-500/10 p-2 rounded-lg border border-indigo-500/20">
+                            <span
+                                class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 shrink-0">Setup</span>
+                            <span class="text-xs text-indigo-200/70 italic">Same as Algorithm</span>
+                        </div>
+
+                        <div v-else-if="oll.setup"
+                            class="flex flex-col gap-1 bg-slate-800/50 p-2 rounded-lg border border-slate-700/50">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="text-[10px] font-bold uppercase tracking-wider text-orange-400/90 shrink-0">Setup</span>
+                                <span v-if="oll.setup_name" class="text-[10px] text-slate-400 font-medium">({{
+                                    oll.setup_name }})</span>
+                            </div>
+                            <code
+                                class="text-xs font-mono text-slate-300 break-all leading-tight">{{ oll.setup }}</code>
+                        </div>
+
                         <div
-                            class="text-xs p-2 px-3 rounded-lg break-all leading-relaxed font-mono bg-[#0a0a0f] text-slate-400">
+                            class="text-sm p-3 rounded-xl break-all leading-relaxed font-mono bg-[#0a0a0f] text-indigo-100 border border-indigo-500/20 shadow-inner">
                             {{ oll.algorithm }}</div>
                     </div>
                 </div>
             </div>
+
+            <div v-else class="space-y-12 py-8">
+                <div v-for="group in sortShape" :key="group.sub_title_name" class="space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-3">
+                        <span class="h-px flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></span>
+                        <span
+                            class="px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm tracking-widest uppercase">{{
+                                group.sub_title_name }}</span>
+                        <span class="h-px flex-1 bg-gradient-to-l from-indigo-500/50 to-transparent"></span>
+                    </h3>
+                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                        <template v-for="id in group.list" :key="id">
+                            <div v-if="getOllById(id)"
+                                class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
+                                <div
+                                    class="flex-shrink-0 relative w-[98px] h-[98px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1 ">
+                                    <CubeIcon3x3 :caseId="id" type="OLL" />
+                                </div>
+                                <div class="flex-1 space-y-2 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-base font-bold text-white">OLL {{ id }}</h4>
+                                    </div>
+
+                                    <div v-if="getOllById(id).setup === 'Same as Algo'"
+                                        class="flex items-center gap-2 bg-indigo-500/10 p-2 rounded-lg border border-indigo-500/20">
+                                        <span
+                                            class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 shrink-0">Setup</span>
+                                        <span class="text-xs text-indigo-200/70 italic">Same as Algorithm</span>
+                                    </div>
+
+                                    <div v-else-if="getOllById(id).setup"
+                                        class="flex flex-col gap-1 bg-slate-800/50 p-2 rounded-lg border border-slate-700/50">
+                                        <div class="flex items-center gap-2">
+                                            <span
+                                                class="text-[10px] font-bold uppercase tracking-wider text-orange-400/90 shrink-0">Setup</span>
+                                            <span v-if="getOllById(id).setup_name"
+                                                class="text-[10px] text-slate-400 font-medium">({{
+                                                    getOllById(id).setup_name }})</span>
+                                        </div>
+                                        <code
+                                            class="text-xs font-mono text-slate-300 break-all leading-tight">{{ getOllById(id).setup }}</code>
+                                    </div>
+
+                                    <div
+                                        class="text-sm p-3 rounded-xl break-all leading-relaxed font-mono bg-[#0a0a0f] text-indigo-100 border border-indigo-500/20 shadow-inner">
+                                        {{ getOllById(id).algorithm }}</div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </div>
 </template>
@@ -51,62 +138,82 @@ useSeoMeta({
 })
 
 const ollAlgorithms = [
-    { id: 1, algorithm: "R U2 R2 F R F' U2 R' F R F'" },
-    { id: 2, algorithm: "r U r' U2 r U2 R' U2 R U' r'" },
-    { id: 3, algorithm: "r' R2 U R' U r U2 r' U R' r" },
-    { id: 4, algorithm: "r' R U' r U2 r' U' R U' R2 r" },
-    { id: 5, algorithm: "r' U2 R U R' U r" },
-    { id: 6, algorithm: "r U2 R' U' R U' r'" },
-    { id: 7, algorithm: "r U R' U R U2 r'" },
-    { id: 8, algorithm: "r' U' R U' R' U2 r" },
-    { id: 9, algorithm: "R U R' U' R' F R2 U R' U' F'" },
-    { id: 10, algorithm: "r U R' U R U' R' U' r' R U R U' R'" },
-    { id: 11, algorithm: "r' R2 U R' U R U2 R' U R' r" },
-    { id: 12, algorithm: "r R2 U' R U' R' U2 R U' r' R" },
-    { id: 13, algorithm: "F U R U' R2 F' R U R U' R'" },
-    { id: 14, algorithm: "R' F R U R' F' R y' R U' R'" },
-    { id: 15, algorithm: "r' U' R' r U' R U r' U r" },
-    { id: 16, algorithm: "r U r' R U R' U' r U' r'" },
-    { id: 17, algorithm: "F R' F' R2 r' U R U' R' U' R' r" },
-    { id: 18, algorithm: "r U R' U R U2 r2 U' R U' R' U2 r" },
-    { id: 19, algorithm: "r U2 R' U' R U' r2 U2 R U R' U r" },
-    { id: 20, algorithm: "r U R' U' r2 R2 U R U' R' U' R' r" },
-    { id: 21, algorithm: "R U2 R' U' R U R' U' R U' R'" },
-    { id: 22, algorithm: "R U2 R2 U' R2 U' R2 U2 R" },
-    { id: 23, algorithm: "R U R' U R U2 R2 U' R U' R' U2 R" },
-    { id: 24, algorithm: "r U R' U' r' F R F'" },
-    { id: 25, algorithm: "F R' F' r U R U' r'" },
-    { id: 26, algorithm: "R U2 R' U' R U' R'" },
-    { id: 27, algorithm: "R U R' U R U2 R'" },
-    { id: 28, algorithm: "r U R' U' r' R U R U' R'" },
-    { id: 29, algorithm: "R U R' U' R U' R' F' U' F R U R'" },
-    { id: 30, algorithm: "F U R U2 R' U' R U2 R' U' F'" },
-    { id: 31, algorithm: "R' U' F U R U' R' F' R" },
-    { id: 32, algorithm: "L U F' U' L' U L F L'" },
-    { id: 33, algorithm: "R U R' U' R' F R F'" },
-    { id: 34, algorithm: "R U R2 U' R' F R U R U' F'" },
-    { id: 35, algorithm: "R U2 R2 F R F' R U2 R'" },
-    { id: 36, algorithm: "R' U' R U' R' U R U x' R U' R' U" },
-    { id: 37, algorithm: "F R U' R' U' R U R' F'" },
-    { id: 38, algorithm: "R U R' U R U' R' U' R' F R F'" },
-    { id: 39, algorithm: "r U' r' U' r y R U R' f'" },
-    { id: 40, algorithm: "R' F R U R' U' F' U R" },
-    { id: 41, algorithm: "R U R' U R U2 R' F R U R' U' F'" },
-    { id: 42, algorithm: "R' U' R U' R' U2 R F R U R' U' F'" },
-    { id: 43, algorithm: "F' U' L' U L F" },
-    { id: 44, algorithm: "F U R U' R' F'" },
-    { id: 45, algorithm: "F R U R' U' F'" },
-    { id: 46, algorithm: "R' U' R' F R F' U R" },
-    { id: 47, algorithm: "R' U' x R' U R U' R' U R U' x' U R" },
-    { id: 48, algorithm: "F R U R' U' R U R' U' F'" },
-    { id: 49, algorithm: "R x' U' z u2 R u2 R u2 R' u" },
-    { id: 50, algorithm: "r' U r2 U' r2 U' r2 U r'" },
-    { id: 51, algorithm: "F U R U' R' U R U' R' F'" },
-    { id: 52, algorithm: "R U R' U R U' y R U' R' F'" },
-    { id: 53, algorithm: "r' U2 R U R' U' R U R' U r" },
-    { id: 54, algorithm: "r U2 R' U' R U R' U' R U' r'" },
-    { id: 55, algorithm: "R U2 R2 U' R U' R' U2 F R F'" },
-    { id: 56, algorithm: "r U r' U R U' R' U R U' R' r U' r'" },
-    { id: 57, algorithm: "R U R' U' R' r U R U' r'" },
+    { id: 1, setup: "F R' F' R U2' F R' F' R2' U2' R'", algorithm: "R U2 R2 F R F' U2 R' F R F'" },
+    { id: 2, setup: "Same as Algo", algorithm: "r U r' U2 r U2 R' U2 R U' r'" },
+    { id: 3, setup_name: "OLL 4", setup: "r' R U' r U2 r' U' R U' R2 r", algorithm: "r' R2 U R' U r U2 r' U R' r" },
+    { id: 4, setup_name: "OLL 3", setup: "r' R2 U R' U r U2 r' U R' r", algorithm: "r' R U' r U2 r' U' R U' R2 r" },
+    { id: 5, setup_name: "OLL 8", setup: "r' U' R U' R' U2 r", algorithm: "r' U2 R U R' U r" },
+    { id: 6, setup_name: "OLL 7", setup: "r U R' U R U2 r'", algorithm: "r U2 R' U' R U' r'" },
+    { id: 7, setup_name: "OLL 6", setup: "r U2 R' U' R U' r'", algorithm: "r U R' U R U2 r'" },
+    { id: 8, setup_name: "OLL 5", setup: "r' U2 R U R' U r", algorithm: "r' U' R U' R' U2 r" },
+    { id: 9, setup_name: "OLL 13", setup: "F U R U' R2 F' R U R U' R'", algorithm: "R U R' U' R' F R2 U R' U' F'" },
+    { id: 10, setup_name: "OLL 14", setup: "R' F R U R' F' R y' R U' R'", algorithm: "r U R' U R U' R' U' r' R U R U' R'" },
+    { id: 11, setup: "M U' R U2 R' U' R U' R2' r", algorithm: "M (R U R' U R U2 R') U M'" },
+    { id: 12, setup: "M' U R' U2 R U R' U R2 r'", algorithm: "M' (R' U' R U' R' U2 R) U' M" },
+    { id: 13, setup_name: "OLL 9", setup: "R U R' U' R' F R2 U R' U' F'", algorithm: "F U R U' R2 F' R U R U' R'" },
+    { id: 14, setup: "F U F' R' F R U' R' F' R", algorithm: "R' F R U R' F' R y' R U' R'" },
+    { id: 15, setup_name: "OLL 16", setup: "R' F R U R' U' F' R U' R' U2 R", algorithm: "y2 R' F' R L' U' L U R' F R" },
+    { id: 16, setup: "r U r' U R U' M' U' r'", algorithm: "y2 R' F R U R' U' F' R U' R' U2 R" },
+    { id: 17, setup_name: "OLL 19", setup: "R' U2 F (R U R' U') F2 U2 F R", algorithm: "y2 (R U R' U) (R' F R F') U2 (R' F R F')" },
+    { id: 18, setup_name: "OLL 17", setup: "(R U R' U) (R' F R F') U2 (R' F R F')", algorithm: "r U R' U R U2 r' U2 R U2 R' U2 R' F R F'" },
+    { id: 19, setup_name: "OLL 18", setup: "r U R' U R U2 r' U2 R U2 R' U2 R' F R F'", algorithm: "y2 R' U2 F (R U R' U') F2 U2 F R" },
+    { id: 20, setup: "(r U R' U') M2 (U R U' R' U') M'", algorithm: "(r U R' U') M2 (U R U' R' U') M'" },
+    { id: 21, setup: "Same as Algo", algorithm: "R U2 R' U' R U R' U' R U' R'" },
+    { id: 22, setup: "Same as Algo", algorithm: "R U2 R2 U' R2 U' R2 U2 R" },
+    { id: 23, setup: "R U2' R D R' U2' R D' R2'", algorithm: "R2 D (R' U2 R) D' (R' U2 R')" },
+    { id: 24, setup_name: "OLL 25", setup: "F R' F' r U R U' r'", algorithm: "r U R' U' r' F R F'" },
+    { id: 25, setup_name: "OLL 24", setup: "r U R' U' r' F R F'", algorithm: "F R' F' r U R U' r'" },
+    { id: 26, setup_name: "Sune", setup: "R U R' U R U2 R'", algorithm: "R U2 R' U' R U' R'" },
+    { id: 27, setup_name: "Antisune", setup: "R U2 R' U' R U' R'", algorithm: "R U R' U R U2 R'" },
+    { id: 28, setup_name: "OLL 57", setup: "(R U R' U') M' (U R U' r')", algorithm: "r U R' U' r' R U R U' R'" },
+    { id: 29, setup: "M F R' F' R U R U' R' U' M'", algorithm: "R U (R' U' R U' R') F' U' F R U R'" },
+    { id: 30, setup: "F (U R U2' R') (U R U2' R') U' F'", algorithm: "F U (R U2 R' U') (R U2 R' U') F'" },
+    { id: 31, setup_name: "OLL 40", setup: "R' F R U R' U' F' U R", algorithm: "R' U' F U R U' R' F' R" },
+    { id: 32, setup_name: "OLL 39", setup: "r U' r' U' r y R U R' f'", algorithm: "L U F' U' L' U L F L'" },
+    { id: 33, setup_name: "OLL 37", setup: "F R U' R' U' R U R' F'", algorithm: "R U R' U' R' F R F'" },
+    { id: 34, setup: "F U R' U' R' F' R U R2' U' R'", algorithm: "R U R2 U' R' F R U R U' F'" },
+    { id: 35, setup: "R U2' R' F R' F' R2' U2' R'", algorithm: "R U2 R2 F R F' R U2 R'" },
+    { id: 36, setup: "F' L F (L' U' L' U') (L U L' U L) y2'", algorithm: "y2 (L' U' L U' L') U L U L (F' L' F)" },
+    { id: 37, setup_name: "OLL 33", setup: "R U R' U' R' F R F'", algorithm: "F (R U' R' U' R) U R' F'" },
+    { id: 38, setup: "F R' F' R U R U R' U' R U' R'", algorithm: "(R U R' U R) (U' R' U' R') (F R F')" },
+    { id: 39, setup_name: "OLL 32", setup: "L U F' U' L' U L F L'", algorithm: "r U' r' U' r y R U R' f'" },
+    { id: 40, setup_name: "OLL 31", setup: "R' U' F U R U' R' F' R", algorithm: "R' F R U R' U' F' U R" },
+    { id: 41, setup: "F U R U' R' F' R U2' R' U' R U' R' y2'", algorithm: "R U R' U R U2 R' F R U R' U' F'" },
+    { id: 42, setup: "F U R U' R' F' R' U2' R U R' U R", algorithm: "(R' U' R U') (R' U2 R) F (R U R' U') F'" },
+    { id: 43, setup_name: "OLL 46", setup: "R' U' R' F R F' U R", algorithm: "f' L' U' L U f" },
+    { id: 44, setup: "f U R U' R' f'", algorithm: "f (R U R' U') f'" },
+    { id: 45, setup_name: "OLL 44", setup: "F U R U' R' F'", algorithm: "F R U R' U' F'" },
+    { id: 46, setup: "R' U' F R' F' R U R", algorithm: "R' U' R' F R F' U R" },
+    { id: 47, setup: "F' U' L' U L U' L' U L F", algorithm: "F' (L' U' L U) (L' U' L U) F" },
+    { id: 48, setup_name: "OLL 51", setup: "f (R U R' U') (R U R' U') f'", algorithm: "F (R U R' U') (R U R' U') F'" },
+    { id: 49, setup_name: "OLL 50", setup: "r' U (r2 U') (r2 U') (r2) U r'", algorithm: "y2 r U' (r2 U) (r2 U) (r2) U' r" },
+    { id: 50, setup: "r U' r2' U r2' U r2' U' r", algorithm: "r' U (r2 U') (r2 U') (r2) U r'" },
+    { id: 51, setup_name: "OLL 48", setup: "F (R U R' U') (R U R' U') F'", algorithm: "f (R U R' U') (R U R' U') f'" },
+    { id: 52, setup: "Same as Algo", algorithm: "R U R' U R U' y R U' R' F'" },
+    { id: 53, setup: "Same as Algo", algorithm: "(r' U' R U') (R' U R U') (R' U2 r)" },
+    { id: 54, setup: "Same as Algo", algorithm: "(r U R' U) (R U' R' U) (R U2 r')" },
+    { id: 55, setup: "F R' F' U2' R U R' U R2' U2' R'", algorithm: "R U2 R2 (U' R U' R') U2 (F R F')" },
+    { id: 56, setup: "r U r' R U R' U' R U R' U' r U' r'", algorithm: "(r U r') (U R U' R') (U R U' R') (r U' r')" },
+    { id: 57, setup_name: "OLL 28", setup: "r U R' U' r' R U R U' R'", algorithm: "(R U R' U') M' (U R U' r')" },
 ]
+const sortBy = ref('number')
+
+const getOllById = (id) => {
+    return ollAlgorithms.find(oll => oll.id === id)
+}
+
+const sortShape = [
+    { sub_title_name: "Dot", list: [1, 2, 3, 4, 17, 18, 19, 20] },
+    { sub_title_name: "Box", list: [5, 6, 35, 37] },
+    { sub_title_name: "Thunder", list: [7, 8, 11, 12, 29, 30, 41, 42] },
+    { sub_title_name: "Big Thunder", list: [39, 40] },
+    { sub_title_name: "W", list: [36, 38] },
+    { sub_title_name: "Big L", list: [13, 14, 15, 16] },
+    { sub_title_name: "Small L", list: [47, 48, 49, 50, 53, 54] },
+    { sub_title_name: "Fish", list: [9, 10, 28] },
+    { sub_title_name: "Chair", list: [31, 32, 43, 44] },
+    { sub_title_name: "Awkward", list: [21, 22, 23, 24, 25, 26, 27] },
+    { sub_title_name: "Line", list: [33, 34, 51, 52, 55, 56, 57, 45, 46] },
+]
+
 </script>

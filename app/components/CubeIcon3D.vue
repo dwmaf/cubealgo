@@ -6,7 +6,6 @@
                     <path d="M 0 0 L 4 2 L 0 4 Z" fill="#000000" />
                 </marker>
             </defs>
-            <!-- Top Face -->
             <g>
                 <path v-for="(s, i) in topStickers" :key="'t' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
@@ -16,7 +15,6 @@
                 <path v-for="(s, i) in leftStickers" :key="'l' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
             </g>
-            <!-- Right Face -->
             <g>
                 <path v-for="(s, i) in rightStickers" :key="'r' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
@@ -42,7 +40,7 @@ const props = defineProps({
     }
 })
 
-// Generate a truly unique and stable ID for this instance to avoid SVG marker conflicts and hydration mismatches
+// Generate a truly unique and stable ID for this instance to avoid SVG marker conflicts and nuxt hydration mismatches
 const uid = useId()
 
 const colors = {
@@ -188,7 +186,7 @@ const computedColors = computed(() => {
         if (n.startsWith('S')) res.left = h('left', b)
     }
 
-    // 4x4 Specific Highlighting
+    
     if (s === 4) {
         if (n === '3Rw') {
             res.right = Array(16).fill(r)
@@ -372,7 +370,7 @@ const arrows = computed(() => {
 })
 
 
-// Points for the isometric cube (Expanded for a bigger look)
+// Koordinat untuk 7 titik utama rubik isometriknya
 const A = { x: 60, y: 5 }
 const B = { x: 115, y: 30 }
 const C = { x: 60, y: 55 }

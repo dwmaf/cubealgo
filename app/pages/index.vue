@@ -8,6 +8,25 @@
                 Panduan lengkap notasi dan algoritma untuk menyelesaikan Rubik's Cube 3x3 dan 4x4. Pelajari OLL, PLL,
                 dan teknik speedcubing lainnya.
             </p>
+
+            <!-- Quick Tip: Offline Access -->
+            <div
+                class="mt-10 mx-auto max-w-2xl p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/10 flex flex-col sm:flex-row items-center gap-4 text-left">
+                <div
+                    class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/10 text-2xl">
+                    📲
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-bold text-white mb-1">Eits, CubeAlgo Bisa Offline!</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Klik ikon <span class="text-indigo-400 font-bold italic">"Install App"</span> di browser Anda
+                        untuk memasang CubeAlgo di HP/Laptop. Setelah terpasang, ratusan algoritma ini bisa diakses <span
+                            class="text-slate-300 underline decoration-indigo-500/30">tanpa sinyal internet
+                            sekalipun.</span>
+                    </p>
+                </div>
+            </div>
+
         </section>
 
         <section class="py-8">
@@ -21,10 +40,10 @@
                     <span
                         class="inline-block py-1 px-3 mb-3 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-500">2x2</span>
                     <h3 class="text-xl font-bold mb-3 text-white">2x2 OLL & PBL</h3>
-                    <p class="text-sm text-slate-400 mb-4">Metode Ortega: 7 OLL dan 5 PBL untuk menyelesaikan 2x2 dengan
+                    <p class="text-sm text-slate-400 mb-4">Metode Ortega: 7 OLL dan 2 PBL untuk menyelesaikan 2x2 dengan
                         cepat.</p>
                     <div class="flex items-center gap-4 text-sm text-slate-500">
-                        <span>12 Algorithms</span>
+                        <span>9 Algorithms</span>
                         <span>•</span>
                         <span>Beginner</span>
                     </div>
@@ -118,13 +137,6 @@
                         class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
                         <CubeIcon3D :notation="notation.symbol" />
                     </div>
-                    <!-- <div class="">
-                        <div
-                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                            <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
-                                class="w-full h-full object-contain" />
-                        </div>
-                    </div> -->
                     <div>
                         <h4 class="text-base font-semibold mb-1 text-white">{{ notation.symbol }}
                         </h4>
@@ -145,13 +157,6 @@
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="notation in wideNotations" :key="notation.symbol"
                     class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
-                    <!-- <div class="flex flex-col gap-2 flex-shrink-0">
-                        <div
-                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                            <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
-                                class="w-full h-full object-contain" />
-                        </div>
-                    </div> -->
                     <div
                         class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
                         <CubeIcon3D :notation="notation.symbol" />
@@ -176,13 +181,6 @@
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="notation in rotationNotations" :key="notation.symbol"
                     class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
-                    <!-- <div class="flex flex-col gap-2 ">
-                        <div
-                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                            <img :src="`/movenotation/${notation.image}.png`" :alt="notation.symbol"
-                                class="w-full h-full object-contain" />
-                        </div>
-                    </div> -->
                     <div
                         class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
                         <CubeIcon3D :notation="notation.symbol" />
@@ -198,9 +196,9 @@
 
         <!-- 4x4 Last Two Edge Pairing Section -->
         <section class="py-12">
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+            <div class="flex items-center justify-between mb-8 flex-wrap ml-4 gap-4">
                 <h2
-                    class="relative pl-4 text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
+                    class="relative text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
                     4x4 Last Two Edge Pairing</h2>
                 <span class="py-1 px-3 rounded-full text-xs font-semibold bg-violet-500/15 text-violet-500">4x4</span>
             </div>
@@ -217,7 +215,7 @@
                         class="flex-shrink-0 relative w-[80px] h-[80px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden text-slate-500">
                         <CubeIcon4x4 :caseId="algo.name" type="Notation" />
                     </div>
-                    
+
                     <div class="flex-1 min-w-0">
                         <h4 class="text-sm font-semibold mb-2 text-white">{{ algo.name }}</h4>
                         <div

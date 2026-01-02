@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-6">
+    <div class="w-full max-w-7xl mx-auto px-2">
         <!-- Hero Section -->
         <section class="py-16 pb-12 text-center">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
@@ -13,10 +13,13 @@
 
         <!-- OLL Parity Algorithms Grid -->
         <section class="py-12">
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+            <div class="flex items-center justify-between mb-8 flex-wrap gap-4 ml-4">
                 <h2
-                    class="relative pl-4 text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
+                    class="relative  text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
                     OLL Parity Cases</h2>
+                <span
+                    class=" text-xs font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">27
+                    Algorithms</span>
             </div>
             <div
                 class="sticky top-[88px] z-40 my-8 mx-auto w-fit p-4 rounded-xl bg-[#0a0a0f]/80 backdrop-blur-md border border-indigo-500/20 shadow-xl text-center font-mono text-sm sm:text-base text-indigo-400">
@@ -31,7 +34,7 @@
                         class="flex-shrink-0 relative w-[100px] h-[100px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1">
                         <CubeIcon4x4 :caseId="algo.name" type="OLL" />
                     </div>
-                    
+
                     <div class="flex-1 min-w-0">
                         <h4 class="text-sm font-semibold text-white mb-1">{{ algo.name }}</h4>
                         <div
@@ -51,13 +54,6 @@
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div
                     class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
-                    <!-- <div class="flex flex-col gap-2 flex-shrink-0">
-                        <div
-                            class="w-[60px] h-[60px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden">
-                            <img :src="`/movenotation/r.png`" alt="gambar belum ada"
-                                class="w-full h-full object-contain" />
-                        </div>
-                    </div> -->
                     <div
                         class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden text-slate-500">
                         <CubeIcon3D notation="3Rw" size="4" />

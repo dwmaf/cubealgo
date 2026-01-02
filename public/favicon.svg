@@ -1,22 +1,18 @@
-<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background rounded corner (optional, for better visibility) -->
-    <rect width="120" height="120" rx="20" fill="#0f172a"/>
-    
-    <g transform="translate(15, 15)">
-        <!-- Top Face (Yellowish) -->
-        <rect x="0" y="0" width="28" height="28" rx="4" fill="#fbbf24"/>
-        <rect x="31" y="0" width="28" height="28" rx="4" fill="#fbbf24"/>
-        <rect x="62" y="0" width="28" height="28" rx="4" fill="#fbbf24"/>
+<svg viewBox="0 0 124 124" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(14, 14)">
+        <!-- Top Row -->
+        <rect x="0" y="0" width="30" height="30" rx="4" fill="#11aa00" stroke="#0a0a0f" stroke-width="1.5" />
+        <rect x="33" y="0" width="30" height="30" rx="4" fill="#ee8800" stroke="#0a0a0f" stroke-width="1.5" />
+        <rect x="66" y="0" width="30" height="30" rx="4" fill="#2040d0" stroke="#0a0a0f" stroke-width="1.5" />
         
-        <rect x="0" y="31" width="28" height="28" rx="4" fill="#fbbf24"/>
-        <rect x="31" y="31" width="28" height="28" rx="4" fill="#fbbf24"/>
-        <rect x="62" y="31" width="28" height="28" rx="4" fill="#fbbf24"/>
+        <!-- Middle Row -->
+        <rect x="0" y="33" width="30" height="30" rx="4" fill="#11aa00" stroke="#0a0a0f" stroke-width="1.5" />
+        <rect x="33" y="33" width="30" height="30" rx="4" fill="#ffff00" stroke="#0a0a0f" stroke-width="1.5" />
+        <rect x="66" y="33" width="30" height="30" rx="4" fill="#2040d0" stroke="#0a0a0f" stroke-width="1.5" />
         
-        <rect x="0" y="62" width="28" height="28" rx="4" fill="#fbbf24"/>
-        <rect x="31" y="62" width="28" height="28" rx="4" fill="#fbbf24"/>
-        <rect x="62" y="62" width="28" height="28" rx="4" fill="#fbbf24"/>
-        
-        <!-- Subtle Indigo borders to match your theme -->
-        <rect x="0" y="0" width="90" height="90" rx="6" fill="none" stroke="#6366f1" stroke-width="1" opacity="0.3"/>
+        <!-- Bottom Row -->
+        <rect x="0" y="66" width="30" height="30" rx="4" fill="#d00000" stroke="#0a0a0f" stroke-width="1.5" />
+        <rect x="33" y="66" width="30" height="30" rx="4" fill="#d00000" stroke="#0a0a0f" stroke-width="1.5" />
+        <rect x="66" y="66" width="30" height="30" rx="4" fill="#d00000" stroke="#0a0a0f" stroke-width="1.5" />
     </g>
 </svg>

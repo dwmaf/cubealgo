@@ -4,6 +4,9 @@
       <div class="w-full max-w-7xl mx-auto px-6">
         <div class="flex items-center justify-between gap-8">
           <NuxtLink to="/" class="flex items-center text-2xl font-extrabold text-gradient">
+            <div class="w-10 ">
+              <CubeIcon3x3 caseId="logo" />
+            </div>
             <span>CubeAlgo</span>
           </NuxtLink>
 
@@ -20,7 +23,7 @@
               class="py-2.5 px-5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-indigo-500/15 transition-all duration-300"
               exact-active-class="!text-white !bg-indigo-500/25 shadow-[0_0_15px_rgba(99,102,241,0.3)]">
               3x3 OLL</NuxtLink>
-            
+
             <NuxtLink to="/3x3-pll"
               class="py-2.5 px-5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-indigo-500/15 transition-all duration-300"
               exact-active-class="!text-white !bg-indigo-500/25 shadow-[0_0_15px_rgba(99,102,241,0.3)]">
@@ -70,18 +73,99 @@
       <NuxtPage />
     </main>
 
-    <footer class="mt-auto py-8 border-t border-indigo-500/15 text-center">
-      <div class="w-full max-w-7xl mx-auto px-6">
-        <p class="text-sm text-slate-500">
-          Built with ❤️ by Dawam AF • <a href="https://nuxt.com" target="_blank" rel="noopener"
-            class="text-indigo-500 hover:text-violet-500">Powered by Nuxt</a>
-        </p>
+    <footer class="mt-auto py-4 px-6 border-t border-indigo-500/15">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-4">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 text-xl font-extrabold text-gradient">
+              <div class="w-8">
+                <CubeIcon3x3 caseId="logo" />
+              </div>
+              <span>CubeAlgo</span>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed max-w-sm">
+              Platform referensi algoritma Rubik tercepat dan terlengkap.
+              Didesain untuk membantu cuber dari semua level menguasai
+              setiap rotasi dengan mudah, kapan saja dan di mana saja.
+            </p>
+          </div>
+
+
+          <div>
+            <h4
+              class="text-sm font-bold uppercase tracking-widest text-slate-100 mb-6 border-b border-indigo-500/10 pb-2 inline-block">
+              Algorithms
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <NuxtLink to="/2x2" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">2x2 Cases
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/3x3-oll" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">3x3 OLL
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/3x3-pll" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">3x3 PLL
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/4x4-oll" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">4x4 OLL
+                  Parity</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/4x4-pll" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">4x4 PLL
+                  Parity</NuxtLink>
+              </li>
+            </ul>
+          </div>
+
+
+          <div>
+            <h4
+              class="text-sm font-bold uppercase tracking-widest text-slate-100 mb-6 border-b border-indigo-500/10 pb-2 inline-block">
+              Information
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <NuxtLink to="/about" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">About Us
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/privacy-policy" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">
+                  Privacy
+                  Policy</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/terms-of-service" class="text-sm text-slate-400 hover:text-indigo-400 transition-colors">
+                  Terms of
+                  Service</NuxtLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-indigo-500/5 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <p class="text-xs tracking-widest font-black text-slate-500 ">
+            &copy; {{ currentYear }} CubeAlgo. Crafted with ❤️ by Dawam AF
+          </p>
+
+          <div class="flex items-center gap-2 opacity-80">
+            <span class="text-xs  tracking-widest font-black text-slate-500">Built
+              with</span>
+            <div class="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800/50 rounded-xl border border-slate-700/50">
+              <img src="/logo-nuxt.ico" class="w-4 h-4" alt="Nuxt Logo" />
+              <span class="text-xs font-bold text-slate-300 tracking-tight">Nuxt</span>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   </div>
 </template>
 
 <script setup>
+const currentYear = new Date().getFullYear()
 const mobileNavOpen = ref(false)
 
 const toggleMobileNav = () => {

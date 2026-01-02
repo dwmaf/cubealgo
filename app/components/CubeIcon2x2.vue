@@ -6,26 +6,21 @@
                     width="38" height="38" rx="6" :fill="active ? '#ffff00' : '#1e293b'" stroke="#0a0a0f"
                     stroke-width="2" />
 
-                <!-- Each side can have 2 stickers -->
-                <!-- Top (Back) -->
                 <rect v-if="sideStickers.back[0]" x="4" y="-10" width="30" height="8" rx="2"
                     :fill="sideStickers.back[0]" />
                 <rect v-if="sideStickers.back[1]" x="46" y="-10" width="30" height="8" rx="2"
                     :fill="sideStickers.back[1]" />
 
-                <!-- Bottom (Front) -->
                 <rect v-if="sideStickers.front[0]" x="4" y="82" width="30" height="8" rx="2"
                     :fill="sideStickers.front[0]" />
                 <rect v-if="sideStickers.front[1]" x="46" y="82" width="30" height="8" rx="2"
                     :fill="sideStickers.front[1]" />
 
-                <!-- Left -->
                 <rect v-if="sideStickers.left[0]" x="-10" y="4" width="8" height="30" rx="2"
                     :fill="sideStickers.left[0]" />
                 <rect v-if="sideStickers.left[1]" x="-10" y="46" width="8" height="30" rx="2"
                     :fill="sideStickers.left[1]" />
 
-                <!-- Right -->
                 <rect v-if="sideStickers.right[0]" x="82" y="4" width="8" height="30" rx="2"
                     :fill="sideStickers.right[0]" />
                 <rect v-if="sideStickers.right[1]" x="82" y="46" width="8" height="30" rx="2"
@@ -57,15 +52,39 @@ const colors = {
 }
 
 const topStickers = computed(() => {
+    const f = false
+    const t = true
     // OLL Cases (TL, TR, BL, BR)
     const ollMaps = {
-        'Sune': [false, false, true, false],
-        'Antisune': [false, true, false, false],
-        'H': [false, false, false, false],
-        'Pi': [false, false, false, false],
-        'T': [true, true, false, false],
-        'U': [false, false, true, true],
-        'L': [true, false, false, true]
+
+        'Sune': [
+            f, f,
+            t, f
+        ],
+        'Antisune': [
+            f, t, 
+            f, f
+        ],
+        'H': [
+            f, f, 
+            f, f
+        ],
+        'Pi': [
+            f, f, 
+            f, f
+        ],
+        'T': [
+            f, t, 
+            f, t
+        ],
+        'U': [
+            f, t, 
+            f, t
+        ],
+        'L': [
+            t, f, 
+            f, t
+        ]
     }
 
     if (props.type === 'OLL' && ollMaps[props.caseName]) {
@@ -82,13 +101,13 @@ const sideStickers = computed(() => {
     if (props.type === 'OLL') {
         const y = colors.yellow
         const maps = {
-            'Sune': { front: [n, y], right: [n, y], back: [y, n], left: [n, n] },
-            'Antisune': { front: [y, n], right: [y, n], back: [n, y], left: [n, n] },
+            'Sune': { front: [n, y], right: [y, n], back: [y, n], left: [n, n] },
+            'Antisune': { front: [y, n], right: [n, y], back: [n, n], left: [y, n] },
             'H': { front: [y, y], back: [y, y], left: [n, n], right: [n, n] },
-            'Pi': { back: [y, y], left: [y, n], right: [y, n], front: [n, n] },
-            'T': { left: [n, y], right: [n, y], back: [n, n], front: [n, n] },
-            'U': { front: [y, y], back: [n, n], left: [n, n], right: [n, n] },
-            'L': { front: [n, y], right: [y, n], back: [n, n], left: [n, n] }
+            'Pi': { back: [n, y], left: [y, y], right: [n, n], front: [n, y] },
+            'T': { left: [n, n], right: [n, n], back: [y, n], front: [y, n] },
+            'U': { front: [n, n], back: [n, n], left: [y, y], right: [n, n] },
+            'L': { front: [y, n], right: [y, n], back: [n, n], left: [n, n] }
         }
         return maps[props.caseName] || blank
     }

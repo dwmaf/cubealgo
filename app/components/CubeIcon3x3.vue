@@ -4,26 +4,22 @@
             <g transform="translate(12, 12)">
                 <!-- Top Stickers (3x3 Grid) -->
                 <!-- Indices: 0-2 (top), 3-5 (mid), 6-8 (bottom) -->
-                <rect v-for="(active, i) in topStickers" :key="i" :x="(i % 3) * 33" :y="Math.floor(i / 3) * 33"
-                    width="30" height="30" rx="4" :fill="active ? '#ffff00' : '#1e293b'" stroke="#0a0a0f"
-                    stroke-width="1.5" />
+                <rect v-for="(val, i) in topStickers" :key="i" :x="(i % 3) * 33" :y="Math.floor(i / 3) * 33" width="30"
+                    height="30" rx="4" :fill="typeof val === 'string' ? val : (val ? colors.yellow : colors.blank)"
+                    stroke="#0a0a0f" stroke-width="1.5" />
 
-                <!-- Top (Back) -->
                 <g v-for="(color, i) in sideStickers.back" :key="'b' + i">
                     <rect v-if="color" :x="i * 33 + 1" y="-12" width="28" height="10" rx="2" :fill="color" />
                 </g>
 
-                <!-- Bottom (Front) -->
                 <g v-for="(color, i) in sideStickers.front" :key="'f' + i">
                     <rect v-if="color" :x="i * 33 + 1" y="99" width="28" height="10" rx="2" :fill="color" />
                 </g>
 
-                <!-- Left -->
                 <g v-for="(color, i) in sideStickers.left" :key="'l' + i">
                     <rect v-if="color" x="-12" :y="i * 33 + 1" width="10" height="28" rx="2" :fill="color" />
                 </g>
 
-                <!-- Right -->
                 <g v-for="(color, i) in sideStickers.right" :key="'r' + i">
                     <rect v-if="color" x="99" :y="i * 33 + 1" width="10" height="28" rx="2" :fill="color" />
                 </g>
@@ -38,12 +34,12 @@
             </g>
 
             <defs>
-                <!-- Marker untuk Ujung Panah (End) -->
+                <!-- end panah -->
                 <marker :id="'arrowhead3x3-end-' + props.caseId" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3"
                     markerHeight="3" orient="auto">
                     <path d="M 0 0 L 10 5 L 0 10 z" fill="#000000" />
                 </marker>
-                <!-- Marker untuk Pangkal Panah (Start) - Dibalik arahnya -->
+                <!-- start panah -->
                 <marker :id="'arrowhead3x3-start-' + props.caseId" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3"
                     markerHeight="3" orient="auto-start-reverse">
                     <path d="M 0 0 L 10 5 L 0 10 z" fill="#000000" />
@@ -72,6 +68,14 @@ const colors = {
 }
 
 const topStickers = computed(() => {
+    if (props.caseId === 'logo') {
+        return [
+            colors.green, colors.orange, colors.blue,
+            colors.green, colors.yellow, colors.blue,
+            colors.red, colors.red, colors.red
+        ]
+    }
+
     const y = true
     const _ = false
 
@@ -293,14 +297,14 @@ const topStickers = computed(() => {
                 [_, y, _]
             ],
             '43': [
-                [_, y, y],
-                [_, y, y],
-                [_, _, y]
+                [y, _, _],
+                [y, y, _],
+                [y, y, _]
             ],
             '44': [
-                [y, y, _],
-                [y, y, _],
-                [y, _, _]
+                [_, _, y],
+                [_, y, y],
+                [_, y, y]
             ],
             '45': [
                 [_, _, y],
@@ -344,18 +348,18 @@ const topStickers = computed(() => {
             ],
             '53': [
                 [_, _, _],
-                [y, y, _],
+                [_, y, y],
                 [_, y, _]
             ],
             '54': [
                 [_, y, _],
-                [y, y, _],
+                [_, y, y],
                 [_, _, _]
             ],
             '55': [
-                [_, _, _],
-                [y, y, y],
-                [_, _, _]
+                [_, y, _],
+                [_, y, _],
+                [_, y, _]
             ],
             '56': [
                 [_, _, _],
@@ -379,6 +383,11 @@ const topStickers = computed(() => {
 const sideStickers = computed(() => {
     const n = null
     const blank = { back: [n, n, n], front: [n, n, n], left: [n, n, n], right: [n, n, n] }
+
+    if (props.caseId === 'logo') {
+        return blank
+    }
+
     const y = colors.yellow
 
     if (props.type === 'OLL') {
@@ -642,16 +651,16 @@ const sideStickers = computed(() => {
                 left: [n, n, n],
             },
             '43': {
-                back: [n, n, n],
-                right: [n, n, n],
-                front: [n, y, n],
-                left: [y, y, y],
+                back: [n, y, n],
+                right: [y, y, y],
+                front: [n, n, n],
+                left: [n, n, n],
             },
             '44': {
-                back: [n, n, n],
-                right: [y, y, y],
-                front: [n, y, n],
-                left: [n, n, n],
+                back: [n, y, n],
+                right: [n, n, n],
+                front: [n, n, n],
+                left: [y, y, y],
             },
             '45': {
                 back: [n, y, n],
@@ -674,7 +683,7 @@ const sideStickers = computed(() => {
             '48': {
                 back: [n, n, y],
                 right: [n, y, n],
-                front: [y, y, n],
+                front: [n, y, y],
                 left: [y, n, y],
             },
             '49': {
@@ -690,10 +699,10 @@ const sideStickers = computed(() => {
                 left: [y, y, y],
             },
             '51': {
-                back: [y, y, n],
-                right: [y, n, y],
-                front: [y, y, n],
-                left: [n, n, n],
+                back: [n, y, y],
+                right: [n, n, n],
+                front: [n, y, y],
+                left: [y, n, y],
             },
             '52': {
                 back: [y, n, n],
@@ -702,22 +711,22 @@ const sideStickers = computed(() => {
                 left: [n, y, n],
             },
             '53': {
-                back: [y, y, y],
-                right: [n, y, n],
-                front: [y, n, y],
-                left: [n, n, n],
+                back: [n, y, n],
+                right: [y, n, y],
+                front: [n, n, n],
+                left: [y, y, y],
             },
             '54': {
-                back: [y, n, y],
-                right: [n, y, n],
-                front: [y, y, y],
-                left: [n, n, n],
+                back: [n, n, n],
+                right: [y, n, y],
+                front: [n, y, n],
+                left: [y, y, y],
             },
             '55': {
-                back: [y, y, y],
-                right: [n, n, n],
-                front: [y, y, y],
-                left: [n, n, n],
+                back: [n, n, n],
+                right: [y, y, y],
+                front: [n, n, n],
+                left: [y, y, y],
             },
             '56': {
                 back: [n, y, n],
@@ -761,113 +770,113 @@ const sideStickers = computed(() => {
             //     front: [o, o, o], 
             //     left: [b, b, b], 
             // },
-            'Z': { 
-                back: [b, o, b], 
+            'Z': {
+                back: [b, o, b],
                 right: [o, b, o],
-                front: [g, r, g], 
-                left: [r, g, r], 
+                front: [g, r, g],
+                left: [r, g, r],
             },
-            'Aa': { 
-                back: [r, g, r], 
+            'Aa': {
+                back: [r, g, r],
                 right: [b, r, o],
-                front: [b, b, g], 
-                left: [g, o, o], 
+                front: [b, b, g],
+                left: [g, o, o],
             },
-            'Ab': { 
-                back: [b, g, o], 
+            'Ab': {
+                back: [b, g, o],
                 right: [g, r, g],
-                front: [b, b, r], 
-                left: [r, o, o], 
+                front: [b, b, r],
+                left: [r, o, o],
             },
-            'E': { 
-                back: [o, g, r], 
+            'E': {
+                back: [o, g, r],
                 right: [b, r, g],
-                front: [o, b, r], 
-                left: [b, o, g], 
+                front: [o, b, r],
+                left: [b, o, g],
             },
-            'Ra': { 
-                back: [r, g, b], 
+            'Ra': {
+                back: [r, g, b],
                 right: [o, b, r],
-                front: [o, o, b], 
-                left: [g, r, g], 
+                front: [o, o, b],
+                left: [g, r, g],
             },
-            'Rb': { 
-                back: [b, r, g], 
+            'Rb': {
+                back: [b, r, g],
                 right: [r, o, b],
-                front: [o, b, o], 
-                left: [r, g, g], 
+                front: [o, b, o],
+                left: [r, g, g],
             },
-            'Ja': { 
-                back: [g, r, r], 
+            'Ja': {
+                back: [g, r, r],
                 right: [b, g, g],
-                front: [b, b, r], 
-                left: [o, o, o], 
+                front: [b, b, r],
+                left: [o, o, o],
             },
-            'Jb': { 
-                back: [g, g, r], 
+            'Jb': {
+                back: [g, g, r],
                 right: [b, b, g],
-                front: [b, r, r], 
-                left: [o, o, o], 
+                front: [b, r, r],
+                left: [o, o, o],
             },
-            'T': { 
-                back: [g, g, r], 
+            'T': {
+                back: [g, g, r],
                 right: [b, o, g],
-                front: [b, b, r], 
-                left: [o, r, o], 
+                front: [b, b, r],
+                left: [o, r, o],
             },
-            'F': { 
-                back: [r, g, o], 
+            'F': {
+                back: [r, g, o],
                 right: [g, o, r],
-                front: [b, b, b], 
-                left: [g, r, o], 
+                front: [b, b, b],
+                left: [g, r, o],
             },
-            'V': { 
-                back: [b, r, g], 
+            'V': {
+                back: [b, r, g],
                 right: [r, g, o],
-                front: [b, b, g], 
-                left: [r, o, o], 
+                front: [b, b, g],
+                left: [r, o, o],
             },
-            'Y': { 
-                back: [b, o, g], 
+            'Y': {
+                back: [b, o, g],
                 right: [r, r, o],
-                front: [b, b, g], 
-                left: [r, g, o], 
+                front: [b, b, g],
+                left: [r, g, o],
             },
-            'Na': { 
-                back: [g, g, b], 
+            'Na': {
+                back: [g, g, b],
                 right: [o, o, r],
-                front: [g, b, b], 
-                left: [o, r, r], 
+                front: [g, b, b],
+                left: [o, r, r],
             },
-            'Nb': { 
-                back: [b, g, g], 
+            'Nb': {
+                back: [b, g, g],
                 right: [r, o, o],
-                front: [b, b, g], 
-                left: [r, r, o], 
+                front: [b, b, g],
+                left: [r, r, o],
             },
-            'Ga': { 
-                back: [g, b, r], 
+            'Ga': {
+                back: [g, b, r],
                 right: [b, o, g],
-                front: [b, r, r], 
-                left: [o, g, o], 
+                front: [b, r, r],
+                left: [o, g, o],
             },
-            'Gb': { 
-                back: [g, o, r], 
+            'Gb': {
+                back: [g, o, r],
                 right: [b, b, g],
-                front: [b, g, r], 
-                left: [o, r, o], 
+                front: [b, g, r],
+                left: [o, r, o],
             },
-            'Gc': { 
-                back: [g, r, r], 
+            'Gc': {
+                back: [g, r, r],
                 right: [b, o, g],
-                front: [b, g, r], 
-                left: [o, b, o], 
+                front: [b, g, r],
+                left: [o, b, o],
             },
-            'Gd': { 
-                back: [g, b, r], 
+            'Gd': {
+                back: [g, b, r],
                 right: [b, g, g],
-                front: [b, o, r], 
-                left: [o, r, o], 
+                front: [b, o, r],
+                left: [o, r, o],
             },
         }
         const resId = props.caseId ? props.caseId.toString() : ''
@@ -885,9 +894,9 @@ const arrows = computed(() => {
         x: c * 33 + 15 + ox,
         y: r * 33 + 15 + oy
     })
-    // 0,0 0,1 0,2
-    // 1,0 1,1 1,2
-    // 2,0 2,1 2,2
+    // 0,0  0,1  0,2
+    // 1,0  1,1  1,2
+    // 2,0  2,1  2,2
     // geser ke kanan kiri itu pakai x
     // geser ke atas bawah itu pakai y
     const pllManualArrows = {
