@@ -1,27 +1,12 @@
 <template>
     <div class="w-full max-w-7xl mx-auto px-2">
-        <section class="py-16 pb-12 text-center">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
-                3x3 <span class="text-gradient">OLL</span> Algorithms
-            </h1>
-            <p class="text-lg text-slate-400 max-w-xl mx-auto">
-                Orientation of Last Layer - 57 algoritma untuk mengorientasikan semua stiker kuning di layer teratas.
-            </p>
-        </section>
-
+        <AlgorithmPageHeader cube-size="3x3" algorithm-type="OLL Algorithms"
+            description="Orientation of Last Layer - 57 algoritma untuk mengorientasikan semua stiker kuning di layer teratas."
+            timer-cube-param="3x3" />
 
         <section class="py-12">
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-                <div class="flex flex-col gap-4 ml-4">
-                    <h2
-                        class="relative text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
-                        {{ sortBy === 'number' ? 'All OLL Cases' : 'Grouped by Shape' }}</h2>
-                    <span
-                        class="w-fit text-xs font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">57
-                        Algorithms</span>
-                </div>
-
-
+            <AlgorithmSectionHeader :title="sortBy === 'number' ? 'All OLL Cases' : 'Grouped by Shape'"
+                :algorithm-count="57">
                 <div class="flex bg-slate-800/50 ml-4 p-1 rounded-xl border border-slate-700/50">
                     <button @click="sortBy = 'number'"
                         :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:text-white']"
@@ -34,104 +19,39 @@
                         By Shape
                     </button>
                 </div>
+            </AlgorithmSectionHeader>
+
+            <div v-if="sortBy === 'number'" class="grid gap-4 py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                <AlgorithmCard v-for="oll in ollAlgorithms" :key="oll.id" :algorithm="{ ...oll, name: `OLL ${oll.id}` }"
+                    :icon-component="CubeIcon3x3" algorithm-type="OLL" />
             </div>
 
-            <div v-if="sortBy === 'number'" class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <div v-for="oll in ollAlgorithms" :key="oll.id"
-                    class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
-                    <div
-                        class="flex-shrink-0 relative w-[98px] h-[98px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1 ">
-                        <CubeIcon3x3 :caseId="oll.id" type="OLL" />
-
-                    </div>
-                    <div class="flex-1 space-y-2 min-w-0">
-                        <div class="flex items-center justify-between">
-                            <h4 class="text-base font-bold text-white">OLL {{ oll.id }}</h4>
-                        </div>
-
-                        <div v-if="oll.setup === 'Same as Algo'"
-                            class="flex items-center gap-2 bg-indigo-500/10 p-2 rounded-lg border border-indigo-500/20">
-                            <span
-                                class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 shrink-0">Setup</span>
-                            <span class="text-xs text-indigo-200/70 italic">Same as Algorithm</span>
-                        </div>
-
-                        <div v-else-if="oll.setup"
-                            class="flex flex-col gap-1 bg-slate-800/50 p-2 rounded-lg border border-slate-700/50">
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="text-[10px] font-bold uppercase tracking-wider text-orange-400/90 shrink-0">Setup</span>
-                                <span v-if="oll.setup_name" class="text-[10px] text-slate-400 font-medium">({{
-                                    oll.setup_name }})</span>
-                            </div>
-                            <code
-                                class="text-xs font-mono text-slate-300 break-all leading-tight">{{ oll.setup }}</code>
-                        </div>
-
-                        <div
-                            class="text-sm p-3 rounded-xl break-all leading-relaxed font-mono bg-[#0a0a0f] text-indigo-100 border border-indigo-500/20 shadow-inner">
-                            {{ oll.algorithm }}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div v-else class="space-y-12 py-8">
+            <!-- Grouped List (By Shape) -->
+            <div v-else class="space-y-12 py-4">
                 <div v-for="group in sortShape" :key="group.sub_title_name" class="space-y-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-3">
                         <span class="h-px flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></span>
                         <span
-                            class="px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm tracking-widest uppercase">{{
-                                group.sub_title_name }}</span>
+                            class="px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm tracking-widest uppercase">
+                            {{ group.sub_title_name }}
+                        </span>
                         <span class="h-px flex-1 bg-gradient-to-l from-indigo-500/50 to-transparent"></span>
                     </h3>
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                         <template v-for="id in group.list" :key="id">
-                            <div v-if="getOllById(id)"
-                                class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
-                                <div
-                                    class="flex-shrink-0 relative w-[98px] h-[98px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1 ">
-                                    <CubeIcon3x3 :caseId="id" type="OLL" />
-                                </div>
-                                <div class="flex-1 space-y-2 min-w-0">
-                                    <div class="flex items-center justify-between">
-                                        <h4 class="text-base font-bold text-white">OLL {{ id }}</h4>
-                                    </div>
-
-                                    <div v-if="getOllById(id).setup === 'Same as Algo'"
-                                        class="flex items-center gap-2 bg-indigo-500/10 p-2 rounded-lg border border-indigo-500/20">
-                                        <span
-                                            class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 shrink-0">Setup</span>
-                                        <span class="text-xs text-indigo-200/70 italic">Same as Algorithm</span>
-                                    </div>
-
-                                    <div v-else-if="getOllById(id).setup"
-                                        class="flex flex-col gap-1 bg-slate-800/50 p-2 rounded-lg border border-slate-700/50">
-                                        <div class="flex items-center gap-2">
-                                            <span
-                                                class="text-[10px] font-bold uppercase tracking-wider text-orange-400/90 shrink-0">Setup</span>
-                                            <span v-if="getOllById(id).setup_name"
-                                                class="text-[10px] text-slate-400 font-medium">({{
-                                                    getOllById(id).setup_name }})</span>
-                                        </div>
-                                        <code
-                                            class="text-xs font-mono text-slate-300 break-all leading-tight">{{ getOllById(id).setup }}</code>
-                                    </div>
-
-                                    <div
-                                        class="text-sm p-3 rounded-xl break-all leading-relaxed font-mono bg-[#0a0a0f] text-indigo-100 border border-indigo-500/20 shadow-inner">
-                                        {{ getOllById(id).algorithm }}</div>
-                                </div>
-                            </div>
+                            <AlgorithmCard v-if="getOllById(id)" :algorithm="{ ...getOllById(id), name: `OLL ${id}` }"
+                                :icon-component="CubeIcon3x3" algorithm-type="OLL" />
                         </template>
                     </div>
                 </div>
             </div>
-
         </section>
     </div>
 </template>
 
 <script setup>
+import CubeIcon3x3 from '~/components/CubeIcon3x3.vue'
+
 useSeoMeta({
     title: '3x3 OLL Algorithms - Cube Algorithm',
     description: '57 algoritma OLL (Orientation of Last Layer) untuk Rubik\'s Cube 3x3. Pelajari semua case dengan gambar dan notasi.'

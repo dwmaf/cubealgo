@@ -2,27 +2,17 @@
     <div class="relative w-full h-full flex items-center justify-center p-1">
         <svg viewBox="0 0 120 120" class="w-full h-full">
             <g transform="translate(13, 13)">
-                <!-- Top Stickers (4x4 Grid) -->
                 <rect v-for="(color, i) in topStickers" :key="'top-' + i" :x="(i % 4) * 24" :y="Math.floor(i / 4) * 24"
                     width="22" height="22" rx="3" :fill="color" stroke="#0a0a0f" stroke-width="1.2" />
-
-                <!-- Side Stickers Indicators (4 stickers per side) -->
-                <!-- Top (Back) -->
                 <g v-for="(color, i) in sideStickers.back" :key="'b' + i">
                     <rect v-if="color" :x="i * 24 + 1" y="-10" width="20" height="8" rx="2" :fill="color" />
                 </g>
-
-                <!-- Bottom (Front) -->
                 <g v-for="(color, i) in sideStickers.front" :key="'f' + i">
                     <rect v-if="color" :x="i * 24 + 1" y="96" width="20" height="8" rx="2" :fill="color" />
                 </g>
-
-                <!-- Left -->
                 <g v-for="(color, i) in sideStickers.left" :key="'l' + i">
                     <rect v-if="color" x="-10" :y="i * 24 + 1" width="8" height="20" rx="2" :fill="color" />
                 </g>
-
-                <!-- Right -->
                 <g v-for="(color, i) in sideStickers.right" :key="'r' + i">
                     <rect v-if="color" x="96" :y="i * 24 + 1" width="8" height="20" rx="2" :fill="color" />
                 </g>

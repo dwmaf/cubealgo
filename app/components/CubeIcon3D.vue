@@ -10,7 +10,6 @@
                 <path v-for="(s, i) in topStickers" :key="'t' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
             </g>
-            <!-- Left (Front) Face -->
             <g>
                 <path v-for="(s, i) in leftStickers" :key="'l' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
@@ -19,8 +18,6 @@
                 <path v-for="(s, i) in rightStickers" :key="'r' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
             </g>
-
-            <!-- Arrows for Notation -->
             <g v-for="(arrow, i) in arrows" :key="'a' + i">
                 <path :d="arrow.d" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"
                     :marker-end="'url(#arrowhead3d-' + uid + ')'" />
@@ -81,7 +78,6 @@ const computedColors = computed(() => {
         }
     }
 
-    // 3x3 Specific Manual Mappings (Restored)
     if (s === 3) {
         if (n.includes('R') && !n.includes('RW') && !n.includes('Rw')) {
             res.left = [b, b, w, b, b, w, b, b, w]

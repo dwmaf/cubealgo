@@ -24,7 +24,6 @@
                     <rect v-if="color" x="99" :y="i * 33 + 1" width="10" height="28" rx="2" :fill="color" />
                 </g>
 
-                <!-- PLL Arrows -->
                 <g v-if="arrows && arrows.length > 0">
                     <line v-for="(arrow, i) in arrows" :key="'arr' + i" :x1="arrow.from.x" :y1="arrow.from.y"
                         :x2="arrow.to.x" :y2="arrow.to.y" stroke="#000000" stroke-width="4"
@@ -34,12 +33,10 @@
             </g>
 
             <defs>
-                <!-- end panah -->
                 <marker :id="'arrowhead3x3-end-' + props.caseId" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3"
                     markerHeight="3" orient="auto">
                     <path d="M 0 0 L 10 5 L 0 10 z" fill="#000000" />
                 </marker>
-                <!-- start panah -->
                 <marker :id="'arrowhead3x3-start-' + props.caseId" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3"
                     markerHeight="3" orient="auto-start-reverse">
                     <path d="M 0 0 L 10 5 L 0 10 z" fill="#000000" />

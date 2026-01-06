@@ -1,26 +1,10 @@
 <template>
     <div class="w-full max-w-7xl mx-auto px-2">
-        <!-- Hero Section -->
-        <section class="py-16 pb-12 text-center">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
-                4x4 <span class="text-gradient">OLL Parity</span>
-            </h1>
-            <p class="text-lg text-slate-400 max-w-xl mx-auto">
-                Algoritma khusus untuk mengatasi OLL parity yang hanya terjadi di Rubik's Cube 4x4. Parity terjadi
-                karena reduksi center dan edge pairing.
-            </p>
-        </section>
+        <AlgorithmPageHeader cube-size="4x4" algorithm-type="OLL Parity" description="Algoritma khusus untuk mengatasi OLL parity yang hanya terjadi di Rubik's Cube 4x4. Parity terjadi
+                karena reduksi center dan edge pairing." :show-timer-button="false" />
 
-        <!-- OLL Parity Algorithms Grid -->
         <section class="py-12">
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4 ml-4">
-                <h2
-                    class="relative  text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
-                    OLL Parity Cases</h2>
-                <span
-                    class=" text-xs font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">27
-                    Algorithms</span>
-            </div>
+            <AlgorithmSectionHeader title="OLL Parity Cases" :algorithm-count="27" />
             <div
                 class="sticky top-[88px] z-40 my-8 mx-auto w-fit p-4 rounded-xl bg-[#0a0a0f]/80 backdrop-blur-md border border-indigo-500/20 shadow-xl text-center font-mono text-sm sm:text-base text-indigo-400">
                 <span class="text-slate-500 block sm:inline mb-1 sm:mb-0 sm:mr-2">Main OLL Parity [*] :</span>
@@ -28,84 +12,48 @@
             </div>
 
             <div class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <div v-for="algo in ollParityAlgorithms" :key="algo.name"
-                    class="flex items-center gap-4 p-3 rounded-xl bg-card-gradient border border-indigo-500/15 overflow-hidden transition-all duration-300 hover:border-indigo-500/35 hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
-                    <div
-                        class="flex-shrink-0 relative w-[100px] h-[100px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 text-slate-500 pt-1">
-                        <CubeIcon4x4 :caseId="algo.name" type="OLL" />
-                    </div>
-
-                    <div class="flex-1 min-w-0">
-                        <h4 class="text-sm font-semibold text-white mb-1">{{ algo.name }}</h4>
-                        <div
-                            class="text-xs p-2 px-3 rounded-lg break-all leading-relaxed font-mono bg-[#0a0a0f] text-slate-400">
-                            {{ algo.algorithm }}</div>
-                    </div>
-                </div>
+                <AlgorithmCard v-for="algo in ollParityAlgorithms" :key="algo.name" :algorithm="algo"
+                    :icon-component="CubeIcon4x4" algorithm-type="OLL" icon-size="w-[100px] h-[100px]" />
             </div>
         </section>
+        
         <section class="py-12">
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-                <h2
-                    class="relative pl-4 text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
-                    Notasi Bantuan</h2>
-            </div>
+            <AlgorithmSectionHeader title="Notasi Bantuan" />
 
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <div
-                    class="flex items-center gap-4 p-4 rounded-xl bg-card-gradient border border-indigo-500/15 hover:border-indigo-500/35 transition-all duration-300">
-                    <div
-                        class="flex-shrink-0 w-[90px] h-[90px] flex items-center justify-center rounded-lg bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden text-slate-500">
-                        <CubeIcon3D notation="3Rw" size="4" />
-                    </div>
-                    <div>
-                        <h4 class="text-base font-semibold mb-1 text-white">3Rw
-                        </h4>
-                        <p class="text-xs text-slate-400">Putar ketiga layer dari sisi kanan 90° searah jarum jam
-                            sekaligus</p>
-                    </div>
-                </div>
+                <NotationCard v-for="notation in helperNotations" :key="notation.symbol" :title="notation.symbol"
+                    :description="notation.description" :icon-component="CubeIcon3D"
+                    :icon-props="{ notation: notation.symbol, size: notation.size }" />
             </div>
         </section>
-        <!-- Understanding OLL Parity -->
+
         <section class="py-12">
-            <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-                <h2
-                    class="relative pl-4 text-2xl md:text-3xl font-bold before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-3/5 before:rounded before:bg-accent-gradient">
-                    Memahami OLL Parity</h2>
-            </div>
+            <AlgorithmSectionHeader title="Memahami OLL Parity" />
 
             <div class="grid gap-6 grid-cols-1 md:grid-cols-3">
-                <div class="p-6 rounded-2xl bg-card-gradient border border-indigo-500/15">
-                    <h3 class="text-lg font-bold mb-3 text-indigo-500">Apa itu OLL Parity?</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">OLL Parity adalah kondisi di mana satu edge di
-                        layer teratas memiliki orientasi yang salah (flipped), yang tidak mungkin terjadi pada cube 3x3
-                        standar.</p>
-                </div>
+                <AppCard title="Apa itu OLL Parity?" title-class="text-lg text-indigo-500"
+                    description="OLL Parity adalah kondisi di mana satu edge di layer teratas memiliki orientasi yang salah (flipped), yang tidak mungkin terjadi pada cube 3x3 standar." />
 
-                <div class="p-6 rounded-2xl bg-card-gradient border border-indigo-500/15">
-                    <h3 class="text-lg font-bold mb-3 text-indigo-500">Mengapa Terjadi?</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">Parity terjadi karena proses reduksi (menyatukan
-                        center dan edge) pada 4x4 bisa menghasilkan state yang "impossible" jika dilihat sebagai 3x3.
-                    </p>
-                </div>
+                <AppCard title="Mengapa Terjadi?" title-class="text-lg text-indigo-500"
+                    description="Parity terjadi karena proses reduksi (menyatukan center dan edge) pada 4x4 bisa menghasilkan state yang 'impossible' jika dilihat sebagai 3x3." />
 
-                <div class="p-6 rounded-2xl bg-card-gradient border border-indigo-500/15">
-                    <h3 class="text-lg font-bold mb-3 text-indigo-500">Kapan Menggunakan?</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">Gunakan algoritma ini ketika Anda sampai pada
-                        langkah OLL dan menemukan satu edge yang flipped secara individual.</p>
-                </div>
+                <AppCard title="Kapan Menggunakan?" title-class="text-lg text-indigo-500"
+                    description="Gunakan algoritma ini ketika Anda sampai pada langkah OLL dan menemukan satu edge yang flipped secara individual." />
             </div>
         </section>
     </div>
 </template>
 
 <script setup>
+import CubeIcon4x4 from '~/components/CubeIcon4x4.vue'
+import CubeIcon3D from '~/components/CubeIcon3D.vue'
 useSeoMeta({
     title: '4x4 OLL Parity Algorithms - Cube Algorithm',
     description: 'Algoritma OLL Parity untuk Rubik\'s Cube 4x4. Pelajari cara mengatasi edge flip yang hanya terjadi di big cubes.'
 })
-
+const helperNotations = [
+    { symbol: '3Rw', image: '3Rw', size:4, description: 'Putar ketiga layer dari sisi kanan 90° searah jarum jam sekaligus' },
+]
 const ollParityAlgorithms = [
     { name: 'H (FB)', image: 'H (FB)', algorithm: "[*] R2 D' R U2 R' D R U2 R" },
     { name: 'H (LR)', image: 'H (LR)', algorithm: "[*] R U R' U R U' R' U R U2 R'" },
