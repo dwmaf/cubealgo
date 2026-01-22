@@ -35,15 +35,15 @@ const pllAlgorithms = [
     { name: 'Ja', setup: "Same as Algo", algorithm: "R' U2 R U R' U2 L U' R U L'" },
     { name: 'Jb', setup: "Same as Algo", algorithm: "R U2 R' U' R U2 L' U R' U' L" },
     { name: 'T', setup_name: "OLL 33 + OLL 37", setup: "(R U R' U' R' F R F') (F R U' R' U' R U R' F')", algorithm: "R U R' U' R' F R2 U' R' U' R U R' F'" },
-    { name: 'F', setup: "Same as Algo", algorithm: "y (R' U' F') (R U R' U') R' F R2 (U' R' U') (R U R' U) R" },
+    { name: 'F', setup: "Same as Algo", algorithm: "y (R' U' F') (R U R' U' R') F R2 (U' R' U') (R U R' U R)" },
     { name: 'V', setup: "Same as Algo", algorithm: "(R' U R' U') y (R' F' R2 U') (R' U R' F R F)" },
     { name: 'Y', setup_name: "OLL 37 + OLL 33", setup: "(F (R U' R' U' R) U R' F') (R U R' U' R' F R F')", algorithm: "(F (R U' R' U' R) U R' F') (R U R' U' R' F R F')" },
-    { name: 'Na', setup: "Same as Algo", algorithm: "(l' D' l U2) (l' D' l U2) (l' D' l U2) (l' D' l U2) (l' D' l U2)" },
-    { name: 'Nb', setup: "Same as Algo", algorithm: "(r D r' U2) (r D r' U2) (r D r' U2) (r D r' U2) (r D r' U2)" },
-    { name: 'Ga', setup: "Same as Algo", algorithm: "R2 U R' U R' U' R U' R2 U' D R' U R D'" },
-    { name: 'Gb', setup: "Same as Algo", algorithm: "R' U' R U D' R2 U R' U R U' R U' R2 D" },
-    { name: 'Gc', setup: "Same as Algo", algorithm: "R2 U' R U' R U R' U R2 U D' R U' R' D" },
-    { name: 'Gd', setup: "Same as Algo", algorithm: "R U R' U' D R2 U' R U' R' U R' U R2 D'" },
+    { name: 'Na', setup: "Same as Algo", algorithm: "(l' D' l U2)5" },
+    { name: 'Nb', setup: "Same as Algo", algorithm: "(r D r' U2)5" },
+    { name: 'Ga', setup: "PLL Gb", algorithm: "R2' u (R' U R' U' R) u' R2 (y') R' U R" },
+    { name: 'Gb', setup: "PLL Ga", algorithm: "R' U' R (y) R2 u (R' U R U' R) u' R2" },
+    { name: 'Gc', setup: "PLL Gd", algorithm: "	R2' u' (R U' R U R') u R2 (y) R U' R'" },
+    { name: 'Gd', setup: "PLL Gc", algorithm: "R U R' (y') R2 u' (R U' R' U R') u R2" },
 ]
 
 </script>
