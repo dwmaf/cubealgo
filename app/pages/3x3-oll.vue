@@ -30,12 +30,12 @@
             <div v-else class="space-y-12 py-4">
                 <div v-for="group in sortShape" :key="group.sub_title_name" class="space-y-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-3">
-                        <span class="h-px flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></span>
+                        <span class="h-px flex-1 bg-linear-to-r from-indigo-500/50 to-transparent"></span>
                         <span
                             class="px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm tracking-widest uppercase">
                             {{ group.sub_title_name }}
                         </span>
-                        <span class="h-px flex-1 bg-gradient-to-l from-indigo-500/50 to-transparent"></span>
+                        <span class="h-px flex-1 bg-linear-to-l from-indigo-500/50 to-transparent"></span>
                     </h3>
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                         <template v-for="id in group.list" :key="id">
@@ -59,9 +59,9 @@ useSeoMeta({
 
 const ollAlgorithms = [
     { id: 1, setup: "F R' F' R U2' F R' F' R2' U2' R'", algorithm: "R U2 R2 F R F' U2 R' F R F'" },
-    { id: 2, setup: "Same as Algo", algorithm: "r U r' U2 r U2 R' U2 R U' r'" },
-    { id: 3, setup_name: "OLL 4", setup: "r' R U' r U2 r' U' R U' R2 r", algorithm: "r' R2 U R' U r U2 r' U R' r" },
-    { id: 4, setup_name: "OLL 3", setup: "r' R2 U R' U r U2 r' U R' r", algorithm: "r' R U' r U2 r' U' R U' R2 r" },
+    { id: 2, setup: "Same as Algo", algorithm: "F R U R' U' S R U R' U' f'" },
+    { id: 3, setup_name: "OLL 4", setup: "r' (R U' r U2 r' U' R) U' R2 r", algorithm: "r' R2 U (R' U r U2 r' U R') r" },
+    { id: 4, setup_name: "OLL 3", setup: "r' R2 U (R' U r U2 r' U R') r", algorithm: "r' (R U' r U2 r' U' R) U' R2 r" },
     { id: 5, setup_name: "OLL 8", setup: "r' U' R U' R' U2 r", algorithm: "r' U2 R U R' U r" },
     { id: 6, setup_name: "OLL 7", setup: "r U R' U R U2 r'", algorithm: "r U2 R' U' R U' r'" },
     { id: 7, setup_name: "OLL 6", setup: "r U2 R' U' R U' r'", algorithm: "r U R' U R U2 r'" },
@@ -107,7 +107,7 @@ const ollAlgorithms = [
     { id: 47, setup: "F' U' L' U L U' L' U L F", algorithm: "F' (L' U' L U) (L' U' L U) F" },
     { id: 48, setup_name: "OLL 51", setup: "f (R U R' U') (R U R' U') f'", algorithm: "F (R U R' U') (R U R' U') F'" },
     { id: 49, setup_name: "OLL 50", setup: "r' U (r2 U') (r2 U') (r2) U r'", algorithm: "y2 r U' (r2 U) (r2 U) (r2) U' r" },
-    { id: 50, setup: "r U' r2' U r2' U r2' U' r", algorithm: "r' U (r2 U') (r2 U') (r2) U r'" },
+    { id: 50, setup_name: "OLL 49", setup: "r U' (r2 U) (r2 U) (r2) U' r", algorithm: "r' U (r2 U') (r2 U') (r2) U r'" },
     { id: 51, setup_name: "OLL 48", setup: "F (R U R' U') (R U R' U') F'", algorithm: "f (R U R' U') (R U R' U') f'" },
     { id: 52, setup: "Same as Algo", algorithm: "R U R' U R U' y R U' R' F'" },
     { id: 53, setup: "Same as Algo", algorithm: "(r' U' R U') (R' U R U') (R' U2 r)" },
@@ -134,6 +134,15 @@ const sortShape = [
     { sub_title_name: "Chair", list: [31, 32, 43, 44] },
     { sub_title_name: "Awkward", list: [21, 22, 23, 24, 25, 26, 27] },
     { sub_title_name: "Line", list: [33, 34, 51, 52, 55, 56, 57, 45, 46] },
+]
+
+const ReverseSetup = [
+    { sub_title_name: "First Reverse", list: [3, 4] },
+    { sub_title_name: "Second Reverse", list: [17, 18, 19] },
+    { sub_title_name: "Third Reverse", list: [5, 6, 7, 8] },
+    { sub_title_name: "Fourth Reverse", list: [31, 32, 39, 40] },
+    { sub_title_name: "Fifth Reverse", list: [48, 49, 50, 51] },
+    { sub_title_name: "Same as Algorithm", list: [2, 21, 22, 52, 53, 54] },
 ]
 
 </script>
