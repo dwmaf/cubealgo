@@ -8,7 +8,7 @@
             <div
                 class="sticky top-[88px] z-40 my-8 mx-auto w-fit p-4 rounded-xl bg-[#0a0a0f]/80 backdrop-blur-md border border-indigo-500/20 shadow-xl text-center font-mono text-sm sm:text-base text-indigo-400">
                 <span class="text-slate-500 block sm:inline mb-1 sm:mb-0 sm:mr-2">Main OLL Parity [*] :</span>
-                Rw U2 x Rw U2 Rw U2 Rw' U2 Lw U2 Rw' U2 Rw U2 Rw' U2 Rw'
+                r U2 x r U2 r U2 r' U2 l U2 r' U2 r U2 r' U2 r'
             </div>
 
             <div class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -84,7 +84,7 @@ const ollParityAlgorithms = [
     { name: 'T (R)', image: 'T (R)', algorithm: "[*] R U R' U' R' F R F'" },
 
     { name: 'U (B)', image: 'U (B)', algorithm: "M [*] M'" },
-    { name: 'U (F)', image: 'U (F)', algorithm: "[*]" },
+    { name: 'Basic', image: 'U (F)', algorithm: "[*]" },
     { name: 'U (L)', image: 'U (L)', algorithm: "[*] R U2 R' U' R U' R'" },
     { name: 'U (R)', image: 'U (R)', algorithm: "[*] U' R U R' U R U2 R'" },
 

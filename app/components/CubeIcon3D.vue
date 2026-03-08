@@ -30,7 +30,12 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-    notation: String,
+    notation: String, // Keep for backward compatibility
+    caseId: [String, Number],
+    type: {
+        type: String,
+        default: 'Notation' // or 'OLL', 'PLL', 'F2L'
+    },
     size: {
         type: [Number, String],
         default: 3
@@ -52,7 +57,6 @@ const colors = {
 }
 
 const computedColors = computed(() => {
-    const n = props.notation || ''
     const s = parseInt(props.size)
     const total = s * s
 
@@ -70,13 +74,244 @@ const computedColors = computed(() => {
         right: Array(total).fill(_)
     }
 
-    if (!n) {
+    // Default solved state if no notation/case
+    if (!props.notation && !props.caseId) {
         return {
             top: Array(total).fill(y),
             left: Array(total).fill(g),
             right: Array(total).fill(r)
         }
     }
+
+    // F2L Case Mappings
+    if (props.type === 'F2L') {
+        const id = props.caseId ? props.caseId.toString() : ''
+
+        if (id === '1') {
+            res.top = [_, _, _, _, _, g, _, _, g]
+            res.left = [_, _, w, g, g, _, g, g, _]
+            res.right = [o, o, _, _, o, o, _, o, o]
+        }
+        // if (id === 'x') {
+        //     res.top = [_,_,_,_,_,_,_,_,_]
+        //     res.left = [_,_,_,g,g,_,g,g,_]
+        //     res.right = [_,_,_,_,o,o,_,o,o]
+        // }
+        if (id === '2') {
+            res.top = [_, _, _, _, _, _, _, o, o]
+            res.left = [_, g, g, g, g, _, g, g, _]
+            res.right = [w, _, _, _, o, o, _, o, o]
+        }
+        if (id === '3') {
+            res.top = [_, _, _, o, _, _, _, _, g]
+            res.left = [_, _, w, g, g, _, g, g, _]
+            res.right = [o, _, _, _, o, o, _, o, o]
+        }
+        if (id === '4') {
+            res.top = [_, g, _, _, _, _, _, _, o]
+            res.left = [_, _, g, g, g, _, g, g, _]
+            res.right = [w, _, _, _, o, o, _, o, o]
+        }
+        if (id === '5') {
+            res.top = [_, g, _, _, _, _, _, _, g]
+            res.left = [_, _, w, g, g, _, g, g, _]
+            res.right = [o, _, _, _, o, o, _, o, o]
+        }
+        if (id === '6') {
+            res.top = [_, _, _, o, _, _, _, _, o]
+            res.left = [_, _, g, g, g, _, g, g, _]
+            res.right = [w, _, _, _, o, o, _, o, o]
+        }
+        if (id === '7') {
+            res.top = [_, _, _, g, _, _, _, _, g]
+            res.left = [_, _, w, g, g, _, g, g, _]
+            res.right = [o, _, _, _, o, o, _, o, o]
+        }
+        if (id === '8') {
+            res.top = [_, o, _, _, _, _, _, _, o]
+            res.left = [_, _, g, g, g, _, g, g, _]
+            res.right = [w, _, _, _, o, o, _, o, o]
+        }
+        if (id === '9') {
+            res.top = [_, o, _, _, _, _, _, _, g]
+            res.left = [_, _, w, g, g, _, g, g, _]
+            res.right = [o, _, _, _, o, o, _, o, o]
+        }
+        if (id === '10') {
+            res.top = [_, _, _, g, _, _, _, _, o]
+            res.left = [_, _, g, g, g, _, g, g, _]
+            res.right = [w, _, _, _, o, o, _, o, o]
+        }
+        if (id === '11') {
+            res.top = [_, _, _, _, _, o, _, _, g]
+            res.left = [_, _, w, g, g, _, g, g, _]
+            res.right = [o, g, _, _, o, o, _, o, o]
+        }
+        if (id === '12') {
+            res.top = [_, _, _, _, _, _, _, g, o]
+            res.left = [_, o, g, g, g, _, g, g, _]
+            res.right = [w, _, _, _, o, o, _, o, o]
+        }
+        if (id === '13') {
+            res.top = [_, _, _, _, _, _, _, o, g]
+            res.left = [_, g, w, g, g, _, g, g, _]
+            res.right = [o, _, _, _, o, o, _, o, o]
+        }
+        if (id === '14') {
+            res.top = [_, _, _, _, _, g, _, _, o]
+            res.left = [_, _, g, g, g, _, g, g, _]
+            res.right = [w, o, _, _, o, o, _, o, o]
+        }
+        if (id === '15') {
+            res.top = [_, _, _, _, _, _, _, g, g]
+            res.left = [_, o, w, g, g, _, g, g, _]
+            res.right = [o, _, _, _, o, o, _, o, o]
+        }
+        if (id === '16') {
+            res.top = [_, _, _, _, _, o, _, _, o]
+            res.left = [_, _, g, g, g, _, g, g, _]
+            res.right = [w, g, _, _, o, o, _, o, o]
+        }
+        if (id === '17') {
+            res.top = [_, _, _, _, _, g, _, _, w]
+            res.left = [_, _, o, g, g, _, g, g, _]
+            res.right = [g, o, _, _, o, o, _, o, o]
+        }
+        if (id === '18') {
+            res.top = [_, _, _, _, _, _, _, o, w]
+            res.left = [_, g, o, g, g, _, g, g, _]
+            res.right = [g, _, _, _, o, o, _, o, o]
+        }
+        if (id === '19') {
+            res.top = [_, g, _, _, _, _, _, _, w]
+            res.left = [_, _, o, g, g, _, g, g, _]
+            res.right = [g, _, _, _, o, o, _, o, o]
+        }
+        if (id === '20') {
+            res.top = [_, _, _, o, _, _, _, _, w]
+            res.left = [_, _, o, g, g, _, g, g, _]
+            res.right = [g, _, _, _, o, o, _, o, o]
+        }
+        if (id === '21') {
+            res.top = [_, _, _, g, _, _, _, _, w]
+            res.left = [_, _, o, g, g, _, g, g, _]
+            res.right = [g, _, _, _, o, o, _, o, o]
+        }
+        if (id === '22') {
+            res.top = [_, o, _, _, _, _, _, _, w]
+            res.left = [_, _, o, g, g, _, g, g, _]
+            res.right = [g, _, _, _, o, o, _, o, o]
+        }
+        if (id === '23') {
+            res.top = [_, _, _, _, _, _, _, g, w]
+            res.left = [_, o, o, g, g, _, g, g, _]
+            res.right = [g, _, _, _, o, o, _, o, o]
+        }
+        if (id === '24') {
+            res.top = [_, _, _, _, _, o, _, _, w]
+            res.left = [_, _, o, g, g, _, g, g, _]
+            res.right = [g, g, _, _, o, o, _, o, o]
+        }
+        if (id === '25') {
+            res.top = [_, _, _, _, _, g, _, _, _]
+            res.left = [_, _, _, g, g, _, g, g, g]
+            res.right = [_, o, _, _, o, o, o, o, o]
+        }
+        if (id === '26') {
+            res.top = [_, _, _, _, _, _, _, o, _]
+            res.left = [_, g, _, g, g, _, g, g, g]
+            res.right = [_, _, _, _, o, o, o, o, o]
+        }
+        if (id === '27') {
+            res.top = [_, _, _, _, _, g, _, _, _]
+            res.left = [_, _, _, g, g, _, g, g, w]
+            res.right = [_, o, _, _, o, o, g, o, o]
+        }
+        if (id === '28') {
+            res.top = [_, _, _, _, _, _, _, o, _]
+            res.left = [_, g, _, g, g, _, g, g, o]
+            res.right = [_, _, _, _, o, o, w, o, o]
+        }
+        if (id === '29') {
+            res.top = [_, _, _, _, _, _, _, o, _]
+            res.left = [_, g, _, g, g, _, g, g, w]
+            res.right = [_, _, _, _, o, o, g, o, o]
+        }
+        if (id === '30') {
+            res.top = [_, _, _, _, _, g, _, _, _]
+            res.left = [_, _, _, g, g, _, g, g, o]
+            res.right = [_, o, _, _, o, o, w, o, o]
+        }
+        if (id === '31') {
+            res.top = [_, _, _, _, _, _, _, _, w]
+            res.left = [_, _, o, g, g, o, g, g, _]
+            res.right = [g, _, _, g, o, o, _, o, o]
+        }
+        if (id === '32') {
+            res.top = [_, _, _, _, _, _, _, _, w]
+            res.left = [_, _, o, g, g, g, g, g, _]
+            res.right = [g, _, _, o, o, o, _, o, o]
+        }
+        if (id === '33') {
+            res.top = [_, _, _, _, _, _, _, _, g]
+            res.left = [_, _, w, g, g, g, g, g, _]
+            res.right = [o, _, _, o, o, o, _, o, o]
+        }
+        if (id === '34') {
+            res.top = [_, _, _, _, _, _, _, _, o]
+            res.left = [_, _, g, g, g, g, g, g, _]
+            res.right = [w, _, _, o, o, o, _, o, o]
+        }
+        if (id === '35') {
+            res.top = [_, _, _, _, _, _, _, _, g]
+            res.left = [_, _, w, g, g, o, g, g, _]
+            res.right = [o, _, _, g, o, o, _, o, o]
+        }
+        if (id === '36') {
+            res.top = [_, _, _, _, _, _, _, _, o]
+            res.left = [_, _, g, g, g, o, g, g, _]
+            res.right = [w, _, _, g, o, o, _, o, o]
+        }
+        if (id === '37') {
+            res.top = [_, _, _, _, _, _, _, _, _]
+            res.left = [_, _, _, g, g, o, g, g, g]
+            res.right = [_, _, _, g, o, o, o, o, o]
+        }
+        if (id === '38') {
+            res.top = [_, _, _, _, _, _, _, _, _]
+            res.left = [_, _, _, g, g, g, g, g, w]
+            res.right = [_, _, _, o, o, o, g, o, o]
+        }
+        if (id === '39') {
+            res.top = [_, _, _, _, _, _, _, _, _]
+            res.left = [_, _, _, g, g, g, g, g, o]
+            res.right = [_, _, _, o, o, o, w, o, o]
+        }
+        if (id === '40') {
+            res.top = [_, _, _, _, _, _, _, _, _]
+            res.left = [_, _, _, g, g, o, g, g, w]
+            res.right = [_, _, _, g, o, o, g, o, o]
+        }
+        if (id === '41') {
+            res.top = [_, _, _, _, _, _, _, _, _]
+            res.left = [_, _, _, g, g, o, g, g, o]
+            res.right = [_, _, _, g, o, o, w, o, o]
+        }
+        if (id === 'x') {
+            res.top = [_, _, _, _, _, _, _, _, _]
+            res.left = [_, _, _, g, g, _, g, g, _]
+            res.right = [_, _, _, _, o, o, _, o, o]
+        }
+        if (id === 'x') {
+            res.top = [_, _, _, _, _, _, _, _, _]
+            res.left = [_, _, _, g, g, _, g, g, _]
+            res.right = [_, _, _, _, o, o, _, o, o]
+        }
+
+        return res
+    }
+
+    const n = props.notation || ''
 
     if (s === 3) {
         if (n.includes('R') && !n.includes('RW') && !n.includes('Rw')) {
@@ -104,24 +339,12 @@ const computedColors = computed(() => {
             res.right = [r, r, w, r, r, w, r, r, w]
         }
         if (n.includes('Rw')) {
-            res.top = [
-                y, b, b,
-                y, b, b,
-                y, b, b,
-            ]
+            res.top = [y, b, b, y, b, b, y, b, b,]
             res.left = [b, w, w, b, w, w, b, w, w]
         }
         if (n.includes('Lw')) {
-            res.top = [
-                g, g, y,
-                g, g, y,
-                g, g, y,
-            ]
-            res.left = [
-                y, y, b,
-                y, y, b,
-                y, y, b,
-            ]
+            res.top = [g, g, y, g, g, y, g, g, y]
+            res.left = [y, y, b, y, y, b, y, y, b]
         }
         if (n.includes('Uw')) {
             res.left = [r, r, r, r, r, r, b, b, b]
@@ -136,16 +359,8 @@ const computedColors = computed(() => {
             res.right = [y, y, r, y, y, r, y, y, r]
         }
         if (n.includes('Bw')) {
-            res.top = [
-                r, r, r,
-                r, r, r,
-                y, y, y,
-            ]
-            res.right = [
-                r, w, w,
-                r, w, w,
-                r, w, w,
-            ]
+            res.top = [r, r, r, r, r, r, y, y, y]
+            res.right = [r, w, w, r, w, w, r, w, w]
         }
         if (n.includes('M')) {
             res.top = [y, g, y, y, g, y, y, g, y]
@@ -182,7 +397,7 @@ const computedColors = computed(() => {
         if (n.startsWith('S')) res.left = h('left', b)
     }
 
-    
+
     if (s === 4) {
         if (n === '3Rw') {
             res.right = Array(16).fill(r)
@@ -220,12 +435,54 @@ const computedColors = computed(() => {
     return res
 })
 
+// Koordinat untuk 7 titik utama rubik isometriknya
 //      A
 // D         B
 //      C
 // E         G
 //      F
+// A: Top Center, B: Top Right, C: Center, D: Top Left, E: Bottom Left, F: Bottom Center, G: Bottom Right
+const pts = computed(() => {
+    // Default angles (untuk Notation, OLL, PLL)
+    // let A_val = { x: 60, y: 5 }
+    // let B_val = { x: 115, y: 30 }
+    // let C_val = { x: 60, y: 55 }
+    // let D_val = { x: 5, y: 30 }
+    // let E_val = { x: 5, y: 100 }
+    // let F_val = { x: 60, y: 125 }
+    // let G_val = { x: 115, y: 100 }
+    let A_val = { x: 54, y: 7 }
+    let B_val = { x: 112, y: 19 }
+    let C_val = { x: 74, y: 45 }
+    let D_val = { x: 8, y: 26 }
+    let E_val = { x: 16, y: 89 }
+    let F_val = { x: 73, y: 116 }
+    let G_val = { x: 106, y: 79 }
+
+    if (props.type === 'F2L') {
+        // --- TEMPAT EDIT ANGLE KHUSUS F2L ---
+        A_val = { x: 54, y: 7 }
+        B_val = { x: 112, y: 19 }
+        C_val = { x: 74, y: 45 }
+        D_val = { x: 8, y: 26 }
+        E_val = { x: 16, y: 89 }
+        F_val = { x: 73, y: 116 }
+        G_val = { x: 106, y: 79 }
+    }
+
+    return {
+        A: A_val,
+        B: B_val,
+        C: C_val,
+        D: D_val,
+        E: E_val,
+        F: F_val,
+        G: G_val
+    }
+})
+
 const arrows = computed(() => {
+    const { A, B, C, D, E, F, G } = pts.value
     const n = props.notation || ''
     const s = parseInt(props.size)
     const res = []
@@ -248,132 +505,83 @@ const arrows = computed(() => {
     if (n === 'R') {
         const pStart = interp(interp(D, C, 0.85), interp(E, F, 0.85), 0.9)
         const pEnd = interp(interp(A, B, 0.8), interp(D, C, 0.8), 0.5)
-        const control = { x: 40, y: 40 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 50, y: 40 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n === 'Rw / r') {
         const pStart = interp(interp(D, C, 0.85), interp(E, F, 0.85), 0.9)
         const pEnd = interp(interp(A, B, 0.8), interp(D, C, 0.8), 0.5)
-        const control = { x: 40, y: 40 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 50, y: 40 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('L')) {
         const pStart = interp(interp(D, C, 0.15), interp(A, B, 0.15), 0.9)
         const pEnd = interp(interp(D, C, 0.15), interp(E, F, 0.15), 0.5)
         const control = { x: 10, y: 20 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('U')) {
         const pStart = interp(interp(F, C, 0.85), interp(G, B, 0.85), 0.9)
         const pEnd = interp(interp(F, C, 0.85), interp(E, D, 0.85), 0.5)
-        const control = { x: 70, y: 75 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 70, y: 70 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('D')) {
         const pStart = interp(interp(D, C, 0.15), interp(E, F, 0.15), 0.85)
         const pEnd = interp(interp(C, F, 0.85), interp(B, G, 0.85), 0.5)
-        const control = { x: 60, y: 125 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 60, y: 115 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('F')) {
         const pStart = interp(interp(A, D, 0.85), interp(B, C, 0.85), 0.15)
         const pEnd = interp(interp(B, C, 0.85), interp(G, F, 0.85), 0.5)
-        const control = { x: 80, y: 40 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 95, y: 30 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('B')) {
         const pStart = interp(interp(F, G, 0.85), interp(C, B, 0.85), 0.15)
         const pEnd = interp(interp(C, B, 0.85), interp(D, A, 0.85), 0.5)
-        const control = { x: 120, y: 30 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 120, y: 15 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('x')) {
         const pStart = interp(interp(C, F, 0.5), interp(D, E, 0.5), 0.5)
         const pEnd = interp(interp(C, B, 0.5), interp(D, A, 0.5), 0.5)
-        const control = { x: 25, y: 30 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 30, y: 30 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('y')) {
         const pStart = interp(interp(B, C, 0.5), interp(G, F, 0.5), 0.5)
         const pEnd = interp(interp(D, C, 0.5), interp(E, F, 0.5), 0.5)
-        const control = { x: 60, y: 95 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 70, y: 90 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('z')) {
         const pStart = interp(interp(A, B, 0.5), interp(D, C, 0.5), 0.5)
         const pEnd = interp(interp(B, C, 0.5), interp(F, G, 0.5), 0.5)
-        const control = { x: 95, y: 35 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 105, y: 25 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('M')) {
         const pEnd = interp(interp(C, F, 0.5), interp(D, E, 0.5), 0.5)
         const pStart = interp(interp(C, B, 0.5), interp(D, A, 0.5), 0.5)
-        const control = { x: 25, y: 30 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 30, y: 30 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('E')) {
         const pEnd = interp(interp(B, C, 0.5), interp(G, F, 0.5), 0.5)
         const pStart = interp(interp(D, C, 0.5), interp(E, F, 0.5), 0.5)
-        const control = { x: 60, y: 95 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 70, y: 90 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     if (n.startsWith('S')) {
         const pStart = interp(interp(A, B, 0.5), interp(D, C, 0.5), 0.5)
         const pEnd = interp(interp(B, C, 0.5), interp(F, G, 0.5), 0.5)
-        const control = { x: 95, y: 35 }
-
-        res.push({
-            d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}`
-        })
+        const control = { x: 105, y: 25 }
+        res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     return res
 })
-
-
-// Koordinat untuk 7 titik utama rubik isometriknya
-const A = { x: 60, y: 5 }
-const B = { x: 115, y: 30 }
-const C = { x: 60, y: 55 }
-const D = { x: 5, y: 30 }
-const E = { x: 5, y: 100 }
-const F = { x: 60, y: 125 }
-const G = { x: 115, y: 100 }
 
 const interp = (p1, p2, r) => ({
     x: p1.x + (p2.x - p1.x) * r,
@@ -385,6 +593,7 @@ const getQuad = (p1, p2, p3, p4) => `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y} L ${p3.
 const gap = 0.02 // Jarak antar blok (0.0 - 0.1)
 
 const topStickers = computed(() => {
+    const { A, B, C, D } = pts.value
     const res = []
     const s = parseInt(props.size)
     for (let i = 0; i < s; i++) {
@@ -406,6 +615,7 @@ const topStickers = computed(() => {
 })
 
 const leftStickers = computed(() => {
+    const { D, C, E, F } = pts.value
     const res = []
     const s = parseInt(props.size)
     for (let i = 0; i < s; i++) {
@@ -426,6 +636,7 @@ const leftStickers = computed(() => {
 })
 
 const rightStickers = computed(() => {
+    const { C, B, F, G } = pts.value
     const res = []
     const s = parseInt(props.size)
     for (let i = 0; i < s; i++) {

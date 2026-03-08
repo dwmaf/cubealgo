@@ -190,7 +190,7 @@ const topStickers = computed(() => {
                 [y, y, y, y],
                 [_, y, y, _]
             ],
-            'U (F)': [
+            'Basic': [
                 [y, y, y, y],
                 [y, y, y, y],
                 [y, y, y, y],
@@ -367,7 +367,7 @@ const sideStickers = computed(() => {
                 back: [n, y, y, n],
                 front: [y, n, n, y],
             },
-            'U (F)': {
+            'Basic': {
                 front: [y, y, y, y],
             },
             'U (L)': {

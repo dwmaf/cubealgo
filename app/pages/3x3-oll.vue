@@ -32,7 +32,7 @@
                     <h3 class="text-xl font-bold text-white flex items-center gap-3">
                         <span class="h-px flex-1 bg-linear-to-r from-indigo-500/50 to-transparent"></span>
                         <span
-                            class="px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm tracking-widest uppercase">
+                            class="px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm tracking-widest uppercase font-black">
                             {{ group.sub_title_name }}
                         </span>
                         <span class="h-px flex-1 bg-linear-to-l from-indigo-500/50 to-transparent"></span>

@@ -9,7 +9,7 @@
 
         <div class="flex-1 space-y-2 min-w-0">
             <div class="flex items-center justify-between">
-                <h4 class="text-base font-bold text-white">{{ algorithm.name }}</h4>
+                <h4 class="text-lg font-bold text-white">{{ algorithm.name }}</h4>
             </div>
 
             <div v-if="algorithm.setup === 'Same as Algo'"
