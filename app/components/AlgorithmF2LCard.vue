@@ -5,14 +5,14 @@
         <!-- Header: Icon & Metadata -->
         <div class="flex items-start gap-4 mb-4">
             <div
-                :class="`relative flex-shrink-0 ${iconSize} flex items-center justify-center rounded-xl bg-gradient-to-br from-[#12121a] to-[#1a1a26] border border-indigo-500/10 overflow-hidden shadow-inner text-slate-500`">
+                :class="`relative shrink-0 ${iconSize} flex items-center justify-center rounded-xl bg-linear-to-br from-bg-secondary to-bg-tertiary border border-indigo-500/10 overflow-hidden shadow-inner text-slate-500`">
                 <component :is="iconComponent" :caseId="id || algorithm.id || algorithm.name" :caseName="algorithm.name"
                     :type="algorithmType" />
             </div>
 
             <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 mb-2">
-                    <h4 class="text-lg font-bold text-white truncate group-hover:text-indigo-300 transition-colors">
+                    <h4 class="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
                         {{ algorithm.name || ('F2L ' + (id || algorithm.id)) }}
                     </h4>
                 </div>
@@ -21,7 +21,7 @@
                 <div v-if="algorithm.setup"
                     class="flex items-center gap-2 bg-slate-800/40 px-2 py-1.5 rounded-lg border border-slate-700/50">
                     <span class="text-[10px] font-bold uppercase tracking-widest text-orange-400 shrink-0">Setup</span>
-                    <code class="text-xs font-mono text-slate-300 truncate">{{ algorithm.setup }}</code>
+                    <code class="text-xs font-mono text-slate-300">{{ algorithm.setup }}</code>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Algorithms Area -->
-        <div class="space-y-3 min-h-[80px]">
+        <div class="space-y-3 min-h-20">
             <div v-if="currentAlgos.length > 0" class="space-y-3">
                 <div v-for="(algo, index) in currentAlgos" :key="index" class="relative">
                     <!-- Algorithm Index Label (if multiple) -->
@@ -53,7 +53,7 @@
 
                     <div class="group/algo relative">
                         <div
-                            class="text-sm p-3 pt-4 rounded-xl break-all leading-relaxed font-mono bg-[#0a0a0f] text-indigo-100 border border-indigo-500/20 shadow-inner group-hover/algo:border-indigo-500/40 transition-colors">
+                            class="text-sm p-3 pt-4 rounded-xl break-all leading-relaxed font-mono bg-bg-primary text-indigo-100 border border-indigo-500/20 shadow-inner group-hover/algo:border-indigo-500/40 transition-colors">
                             {{ algo }}
                         </div>
 

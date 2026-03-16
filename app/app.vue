@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50 py-4 bg-[#0a0a0f]/85 backdrop-blur-xl border-b border-indigo-500/15">
+    <header class="sticky top-0 z-50 py-4 bg-bg-primary/85 backdrop-blur-xl border-b border-indigo-500/15">
       <div class="w-full max-w-7xl mx-auto px-6">
         <div class="flex items-center justify-between gap-8">
           <NuxtLink to="/" class="flex items-center text-2xl font-extrabold text-gradient">
@@ -23,15 +23,15 @@
             <!-- 3x3 Dropdown -->
             <div class="relative group">
               <button @click="toggle3x3"
-                class="flex items-center gap-1 py-2.5 px-5 rounded-xl font-medium text-sm transition-all duration-300 group-hover:bg-indigo-500/10 cursor-pointer"
+                class="flex items-center gap-2 py-2.5 px-5 rounded-xl font-medium text-sm transition-all duration-300 group-hover:bg-indigo-500/10 cursor-pointer"
                 :class="dropdown3x3Open || $route.path.includes('3x3') ? 'text-white bg-indigo-500/15' : 'text-slate-400 hover:text-white'">
                 <span>3x3</span>
                 <span class="text-[10px] transition-transform duration-300"
                   :class="{ 'rotate-180': dropdown3x3Open }">▼</span>
               </button>
 
-            <div v-if="dropdown3x3Open"
-                class="absolute top-full left-0 mt-2 w-48 py-2 bg-[#10101a]/95 backdrop-blur-2xl border border-indigo-500/15 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+              <div v-if="dropdown3x3Open"
+                class="absolute top-full -right-4 md:right-0 md:left-auto mt-2 w-48 py-2 bg-[#10101a]/95 backdrop-blur-2xl border border-indigo-500/15 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
                 <NuxtLink to="/3x3-f2l"
                   class="block px-5 py-2.5 text-sm text-slate-400 hover:text-white hover:bg-indigo-500/20 transition-colors"
                   active-class="!text-white bg-indigo-500/10 shadow-inner">
@@ -53,7 +53,7 @@
             <!-- 4x4 Dropdown -->
             <div class="relative group">
               <button @click="toggle4x4"
-                class="flex items-center gap-1 py-2.5 px-5 rounded-xl font-medium text-sm transition-all duration-300 group-hover:bg-indigo-500/10 cursor-pointer"
+                class="flex items-center gap-2 py-2.5 px-5 rounded-xl font-medium text-sm transition-all duration-300 group-hover:bg-indigo-500/10 cursor-pointer"
                 :class="dropdown4x4Open || $route.path.includes('4x4') ? 'text-white bg-indigo-500/15' : 'text-slate-400 hover:text-white'">
                 <span>4x4</span>
                 <span class="text-[10px] transition-transform duration-300"
@@ -61,7 +61,7 @@
               </button>
 
               <div v-if="dropdown4x4Open"
-                class="absolute top-full left-0 mt-2 w-48 py-2 bg-[#10101a]/95 backdrop-blur-2xl border border-indigo-500/15 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+                class="absolute top-full -right-4 md:right-0 md:left-auto mt-2 w-48 py-2 bg-[#10101a]/95 backdrop-blur-2xl border border-indigo-500/15 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
                 <NuxtLink to="/4x4-oll"
                   class="block px-5 py-2.5 text-sm text-slate-400 hover:text-white hover:bg-indigo-500/20 transition-colors"
                   active-class="!text-white bg-indigo-500/10">
@@ -241,8 +241,20 @@ const mobileNavOpen = ref(false)
 const dropdown3x3Open = ref(false)
 const dropdown4x4Open = ref(false)
 
-const toggleMobileNav = () => {
+const route = useRoute()
+
+const toggleMobileNav = (e) => {
+  e.stopPropagation()
   mobileNavOpen.value = !mobileNavOpen.value
+
+  // Jika membuka navbar, cek rute untuk membuka dropdown yang sesuai
+  if (mobileNavOpen.value) {
+    if (route.path.includes('3x3')) {
+      dropdown3x3Open.value = true
+    } else if (route.path.includes('4x4')) {
+      dropdown4x4Open.value = true
+    }
+  }
 }
 
 const toggle3x3 = (e) => {
@@ -262,11 +274,25 @@ const closeDropdowns = () => {
   dropdown4x4Open.value = false
 }
 
-const route = useRoute()
-watch(() => route.path, () => {
+// const route = useRoute()
+watch(() => route.path, (newPath) => {
+  
+  // closeDropdowns()
+
+  if (mobileNavOpen.value) {
+    if (newPath.includes('3x3')) {
+      dropdown3x3Open.value = true
+      dropdown4x4Open.value = false
+    } else if (newPath.includes('4x4')) {
+      dropdown4x4Open.value = true
+      dropdown3x3Open.value = false
+    }
+  }
+  else {
+    closeDropdowns()
+  }
   mobileNavOpen.value = false
-  closeDropdowns()
-})
+}, { immediate: true })
 
 onMounted(() => {
   window.addEventListener('click', closeDropdowns)
