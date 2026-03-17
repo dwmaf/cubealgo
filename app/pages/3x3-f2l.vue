@@ -223,9 +223,9 @@ const f2lAlgorithms = [
     {
         id: 20,
         setup: "L' U' L U L' U2 L U",
-        fr: ["U' R U R' U r U' r' U2 r U r'"],
+        fr: ["d' L' U2 L U' L' U L"],
         fl: ["U' L' U2 L U' L' U L"],
-        bl: ["U' L U L' U l U' l' U2 l U l'"],
+        bl: ["d' R' U2 R U' R' U R"],
         br: ["U' R' U2 R U' R' U R"],
     },
     {
