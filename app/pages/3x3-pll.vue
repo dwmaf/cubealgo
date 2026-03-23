@@ -40,10 +40,10 @@ const pllAlgorithms = [
     { name: 'Y', setup_name: "OLL 37 + OLL 33", setup: "(F (R U' R' U' R) U R' F') (R U R' U' R' F R F')", algorithm: "(F (R U' R' U' R) U R' F') (R U R' U' R' F R F')" },
     { name: 'Na', setup: "Same as Algo", algorithm: "R U R' U (R U2 R' U' R U2 L' U R' U' L) U' R U' R'" },
     { name: 'Nb', setup: "Same as Algo", algorithm: "L' U' L U' (L' U2 L U L' U2 R U' L U R') U L' U L" },
-    { name: 'Ga', setup: "PLL Gb", algorithm: "R2 (U R' U R' U' R U') R2 (D U') (R' U R) D'" },
-    { name: 'Gb', setup: "PLL Ga", algorithm: "(R' U' R) (U D') R2 (U R' U R U' R U') R2 D" },
-    { name: 'Gc', setup: "PLL Gd", algorithm: "R2 (U' R U' R U R' U) R2 (D' U) (R U' R') D" },
-    { name: 'Gd', setup: "PLL Gc", algorithm: "(R U R') (U' D) R2 (U' R U' R' U R' U) R2 D'" },
+    { name: 'Ga', setup: "PLL Gb", algorithm: "R2 (U R' U) (R' U' R U') R2 (D U') (R' U R) D'" },
+    { name: 'Gb', setup: "PLL Ga", algorithm: "(R' U' R) (U D') R2 (U R' U R) (U' R U') R2 D" },
+    { name: 'Gc', setup: "PLL Gd", algorithm: "R2 (U' R U') (R U R' U) R2 (D' U) (R U' R') D" },
+    { name: 'Gd', setup: "PLL Gc", algorithm: "(R U R') (U' D) R2 (U' R U' R') (U R' U) R2 D'" },
 ]
 
 </script>
