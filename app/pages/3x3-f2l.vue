@@ -344,7 +344,7 @@ const f2lAlgorithms = [
         id: 35,
         setup: "R' F R F' R U' R' U2",
         fr: ["U2 R U R' F R' F' R"],
-        fl: ["L' U' L U' L' U L F' L F L'"],
+        fl: ["U2 L F' L' F U2 L' U' L"],
         bl: ["U' L F' L F L' U L'"],
         br: ["R' F R' F' R U R U' R' U' R"],
     },
@@ -359,10 +359,10 @@ const f2lAlgorithms = [
     {
         id: 37,
         setup: "R' U R d' R U2 R' U2 R U' R'",
-        fr: ["R' F R F' R U' R' U R U' R' U2 R U' R'", "R U' R' d R' U2 R U2 R' U R", "R U R' U2 R U2 R' d R' U' R"],
-        fl: ["L' U2 L U' L' U2 L d' L U L'", "L' U L d' L U2 L' U2 L U' L'"],
-        bl: ["L U' L' d L' U2 L U2 L' U L", "L U2 L' U L U2 L' (U f' L' f / d L' U' L)"],
-        br: ["R' U R d' R U2 R' U2 R U' R'", "R' U' R U2 R' U2 R (d' R U R' / U' f R f')"],
+        fr: ["R' F R F' (R U' R' U R U' R' U2 R U' R')", "R U' R' d R' U2 R U2 R' U R", "R U R' U2 R U2 R' d R' U' R"],
+        fl: ["L F' L' F (L' U L U' L' U L U2 L' U L)", "L' U2 L U' L' U2 L d' L U L'", "L' U L d' L U2 L' U2 L U' L'"],
+        bl: ["L U L' U' (L U2 L' U' l U' l' U2 l U l')", "L U' L' d L' U2 L U2 L' U L", "L U2 L' U L U2 L' (U f' L' f / d L' U' L)"],
+        br: ["R' U' R U (R' U2 R U r' U r U2 r' U' r)", "R' U R d' R U2 R' U2 R U' R'", "R' U' R U2 R' U2 R (d' R U R' / U' f R f')"],
     },
     {
         id: 38,
