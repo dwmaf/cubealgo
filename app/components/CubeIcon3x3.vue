@@ -154,9 +154,9 @@ const topStickers = computed(() => {
                 [_, _, y]
             ],
             '15': [
-                [_, y, y],
-                [_, y, _],
-                [_, y, _]
+                [_, _, _],
+                [y, y, y],
+                [_, _, y]
             ],
             '16': [
                 [_, _, _],
@@ -480,10 +480,10 @@ const sideStickers = computed(() => {
                 left: [y, n, n],
             },
             '15': {
-                back: [y, n, n],
-                right: [n, y, n],
-                front: [n, n, y],
-                left: [n, y, y],
+                back: [y, y, n],
+                right: [y, n, n],
+                front: [n, y, n],
+                left: [n, n, y],
             },
             '16': {
                 back: [n, y, y],
