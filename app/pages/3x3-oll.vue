@@ -110,11 +110,11 @@ const ollAlgorithms = [
     { id: 50, setup: "F U R U' R' F' R U R' U R U2 R'", algorithm: "R U2 R' U' R U' R' F R U R' U' F'" },
     { id: 51, setup_name: "OLL 48", setup: "F (R U R' U') (R U R' U') F'", algorithm: "f (R U R' U') (R U R' U') f'" },
     { id: 52, setup: "R U R' U R U2 R' U' f R U R' U' f' (U')", algorithm: "R U R' U R U2 R' U' f R U R' U' f'" },
-    { id: 53, setup: "Same as Algo", algorithm: "(r' U' R U') (R' U R U') (R' U2 r)" },
-    { id: 54, setup: "Same as Algo", algorithm: "(r U R' U) (R U' R' U) (R U2 r')" },
+    { id: 53, setup: "Same as Algo", algorithm: "r' U' (R U' R') U (R U' R') U2 r" },
+    { id: 54, setup: "Same as Algo", algorithm: "r U (R' U R) U' (R' U R) U2 r'" },
     { id: 55, setup: "F R' F' U2' R U R' U R2' U2' R'", algorithm: "R U2 R2 (U' R U' R') U2 (F R F')" },
     { id: 56, setup: "r U r' R U R' U' R U R' U' r U' r'", algorithm: "(r U r') (U R U' R') (U R U' R') (r U' r')" },
-    { id: 57, setup_name: "OLL 28", setup: "r U R' U' r' R U R U' R'", algorithm: "(R U R' U') M' (U R U' r')" },
+    { id: 57, setup_name: "OLL 28", setup: "r U R' U' M U R U' R'", algorithm: "(R U R' U') M' (U R U' r')" },
 ]
 const sortBy = ref('number')
 
