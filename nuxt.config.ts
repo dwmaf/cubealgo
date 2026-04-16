@@ -20,8 +20,10 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' },
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'manifest', href: '/manifest.webmanifest' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, 
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }, 
+        { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' }, 
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }
       ]
     }
   },
@@ -41,19 +43,19 @@ export default defineNuxtConfig({
       start_url: '.',
       icons: [
         {
-          src: '/pwa-icon.png',
+          src: '/web-app-manifest-192x192.png',
           sizes: '192x192',
           type: 'image/png',
           purpose: 'any'
         },
         {
-          src: '/pwa-icon.png',
+          src: '/web-app-manifest-512x512.png',
           sizes: '512x512',
           type: 'image/png',
           purpose: 'any'
         },
         {
-          src: '/pwa-icon.png',
+          src: '/web-app-manifest-512x512.png',
           sizes: '512x512',
           type: 'image/png',
           purpose: 'maskable'
