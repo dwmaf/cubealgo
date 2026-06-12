@@ -1,6 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50 py-4 bg-white/85 dark:bg-bg-primary/85 backdrop-blur-xl border-b border-slate-200 dark:border-indigo-500/15">
+  <div :class="{ 'dark': isDark }" class="min-h-screen flex flex-col">
+    <header
+      class="sticky top-0 z-50 py-4 bg-white/85 dark:bg-bg-primary/85 backdrop-blur-xl border-b border-slate-200 dark:border-indigo-500/15">
       <div class="w-full max-w-7xl mx-auto px-6">
         <div class="flex items-center justify-between gap-8">
           <NuxtLink to="/" class="flex items-center text-2xl font-extrabold text-gradient">
@@ -74,23 +75,50 @@
                 </NuxtLink>
               </div>
             </div>
+
+            <button @click="toggleTheme"
+              class="ml-4 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-indigo-500/15 transition-colors"
+              :title="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+              <span v-if="isDark">
+                <Icon name="moon-mono" width="20px" height="20px" />
+              </span>
+              <span v-else>
+                <Icon name="sunrise" width="20px" height="20px" color="orange" />
+              </span>
+            </button>
           </nav>
 
-          <button
-            class="md:hidden flex items-center justify-center w-10 h-10 bg-transparent border border-slate-200 dark:border-indigo-500/15 rounded-lg text-slate-900 dark:text-white cursor-pointer"
-            @click="toggleMobileNav" aria-label="Toggle navigation">
-            <span v-if="!mobileNavOpen">☰</span>
-            <span v-else>✕</span>
-          </button>
+          <div class="flex items-center gap-2 md:hidden">
+            
+            <button
+              class="flex items-center justify-center w-10 h-10 bg-transparent border border-slate-200 dark:border-indigo-500/15 rounded-lg text-slate-900 dark:text-white cursor-pointer"
+              @click="toggleMobileNav" aria-label="Toggle navigation">
+              <span v-if="!mobileNavOpen">☰</span>
+              <span v-else>✕</span>
+            </button>
+          </div>
         </div>
 
-        <nav v-if="mobileNavOpen" class="flex flex-col gap-1 py-4 mt-4 border-t border-slate-200 dark:border-indigo-500/15">
+        <nav v-if="mobileNavOpen"
+          class="flex flex-col gap-1 py-4 mt-4 border-t border-slate-200 dark:border-indigo-500/15">
+          <button @click="toggleTheme"
+              class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-slate-100 dark:hover:bg-indigo-500/15 transition-colors"
+              :title="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+              <span v-if="isDark">
+                <Icon name="moon-mono" width="20px" height="20px" />
+              </span>
+              <span v-else>
+                <Icon name="sunrise" width="20px" height="20px" color="orange" />
+              </span>
+            </button>
           <NuxtLink to="/"
             class="py-2.5 px-4 rounded-xl font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200 dark:text-slate-400 dark:hover:text-white dark:hover:bg-indigo-500/15 transition-all duration-300"
-            exact-active-class="!text-slate-900 !bg-slate-100 dark:!text-white dark:!bg-indigo-500/25" @click="mobileNavOpen = false">Home</NuxtLink>
+            exact-active-class="!text-slate-900 !bg-slate-100 dark:!text-white dark:!bg-indigo-500/25"
+            @click="mobileNavOpen = false">Home</NuxtLink>
           <NuxtLink to="/2x2"
             class="py-2.5 px-4 rounded-xl font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200 dark:text-slate-400 dark:hover:text-white dark:hover:bg-indigo-500/15 transition-all duration-300"
-            exact-active-class="!text-slate-900 !bg-slate-100 dark:!text-white dark:!bg-indigo-500/25" @click="mobileNavOpen = false">2x2</NuxtLink>
+            exact-active-class="!text-slate-900 !bg-slate-100 dark:!text-white dark:!bg-indigo-500/25"
+            @click="mobileNavOpen = false">2x2</NuxtLink>
 
           <!-- 3x3 Mobile -->
           <div class="space-y-1">
@@ -165,27 +193,39 @@
             </h4>
             <ul class="space-y-3">
               <li>
-                <NuxtLink to="/2x2" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">2x2 Cases
+                <NuxtLink to="/2x2"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                  2x2 Cases
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/3x3-f2l" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">3x3 F2L
+                <NuxtLink to="/3x3-f2l"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                  3x3 F2L
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/3x3-oll" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">3x3 OLL
+                <NuxtLink to="/3x3-oll"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                  3x3 OLL
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/3x3-pll" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">3x3 PLL
+                <NuxtLink to="/3x3-pll"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                  3x3 PLL
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/4x4-oll" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">4x4 OLL
+                <NuxtLink to="/4x4-oll"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                  4x4 OLL
                   Parity</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/4x4-pll" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">4x4 PLL
+                <NuxtLink to="/4x4-pll"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                  4x4 PLL
                   Parity</NuxtLink>
               </li>
             </ul>
@@ -199,16 +239,20 @@
             </h4>
             <ul class="space-y-3">
               <li>
-                <NuxtLink to="/about" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">About Us
+                <NuxtLink to="/about"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                  About Us
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/privacy-policy" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                <NuxtLink to="/privacy-policy"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
                   Privacy
                   Policy</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/terms-of-service" class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                <NuxtLink to="/terms-of-service"
+                  class="text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
                   Terms of
                   Service</NuxtLink>
               </li>
@@ -216,7 +260,8 @@
           </div>
         </div>
 
-        <div class="pt-4 border-t border-slate-200 dark:border-indigo-500/5 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div
+          class="pt-4 border-t border-slate-200 dark:border-indigo-500/5 flex flex-col sm:flex-row items-center justify-between gap-6">
           <p class="text-xs tracking-widest font-black text-slate-500 ">
             &copy; {{ currentYear }} CubeAlgo. Crafted with ❤️ by Dawam AF
           </p>
@@ -224,7 +269,8 @@
           <div class="flex items-center gap-2 opacity-80">
             <span class="text-xs  tracking-widest font-black text-slate-500">Built
               with</span>
-            <div class="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50">
+            <div
+              class="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50">
               <img src="/logo-nuxt.ico" class="w-4 h-4" alt="Nuxt Logo" />
               <span class="text-xs font-bold text-slate-700 dark:text-slate-300 tracking-tight">Nuxt</span>
             </div>
@@ -236,12 +282,30 @@
 </template>
 
 <script setup>
+import Icon from '~/components/Icon.vue'
+
 const currentYear = new Date().getFullYear()
 const mobileNavOpen = ref(false)
 const dropdown3x3Open = ref(false)
 const dropdown4x4Open = ref(false)
 
+const isDark = ref(true)
+
 const route = useRoute()
+
+const toggleTheme = () => {
+  isDark.value = !isDark.value
+  localStorage.theme = isDark.value ? 'dark' : 'light'
+  updateDocumentClass()
+}
+
+const updateDocumentClass = () => {
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+}
 
 const toggleMobileNav = (e) => {
   e.stopPropagation()
@@ -276,7 +340,7 @@ const closeDropdowns = () => {
 
 // const route = useRoute()
 watch(() => route.path, (newPath) => {
-  
+
   // closeDropdowns()
 
   if (mobileNavOpen.value) {
@@ -295,6 +359,14 @@ watch(() => route.path, (newPath) => {
 }, { immediate: true })
 
 onMounted(() => {
+  const savedTheme = localStorage.theme
+  if (savedTheme) {
+    isDark.value = savedTheme === 'dark'
+  } else {
+    isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+  }
+
+  // Add listener to close dropdowns on outside click
   window.addEventListener('click', closeDropdowns)
 })
 

@@ -1,8 +1,8 @@
 @import "tailwindcss";
-
+@variant dark (&:where(.dark, .dark *));
 @theme {
   /* Background Colors */
-  --dark-mode: variant; 
+  /* --dark-mode: variant;  */
 
   --color-bg-primary: #0a0a0f;
   --color-bg-secondary: #12121a;
