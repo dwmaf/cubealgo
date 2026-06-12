@@ -5,16 +5,16 @@
                 <rect v-for="(color, i) in topStickers" :key="'top-' + i" :x="(i % 4) * 24" :y="Math.floor(i / 4) * 24"
                     width="22" height="22" rx="3" :fill="color" stroke="#0a0a0f" stroke-width="1.2" />
                 <g v-for="(color, i) in sideStickers.back" :key="'b' + i">
-                    <rect v-if="color" :x="i * 24 + 1" y="-10" width="20" height="8" rx="2" :fill="color" />
+                    <rect v-if="color" :x="i * 24 + 1" y="-10" width="20" height="8" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
                 <g v-for="(color, i) in sideStickers.front" :key="'f' + i">
-                    <rect v-if="color" :x="i * 24 + 1" y="96" width="20" height="8" rx="2" :fill="color" />
+                    <rect v-if="color" :x="i * 24 + 1" y="96" width="20" height="8" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
                 <g v-for="(color, i) in sideStickers.left" :key="'l' + i">
-                    <rect v-if="color" x="-10" :y="i * 24 + 1" width="8" height="20" rx="2" :fill="color" />
+                    <rect v-if="color" x="-10" :y="i * 24 + 1" width="8" height="20" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
                 <g v-for="(color, i) in sideStickers.right" :key="'r' + i">
-                    <rect v-if="color" x="96" :y="i * 24 + 1" width="8" height="20" rx="2" :fill="color" />
+                    <rect v-if="color" x="96" :y="i * 24 + 1" width="8" height="20" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
             </g>
         </svg>
@@ -37,7 +37,7 @@ const colors = {
     blue: '#2040d0',
     green: '#11aa00',
     white: '#ffffff',
-    blank: '#1e293b'
+    blank: 'var(--sticker-blank)'
 }
 
 const topStickers = computed(() => {

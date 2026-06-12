@@ -1,27 +1,27 @@
 <template>
     <div
-        class="group flex flex-col p-4 rounded-2xl bg-card-gradient border border-indigo-500/10 transition-all duration-300 hover:border-indigo-500/30 hover:shadow-[0_0_40px_rgba(99,102,241,0.15)]">
+        class="group flex flex-col p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-indigo-500/10 transition-all duration-300 hover:border-indigo-500/30 hover:shadow-[0_0_40px_rgba(99,102,241,0.15)]">
 
         <!-- Header: Icon & Metadata -->
         <div class="flex items-start gap-4 mb-4">
             <div
-                :class="`relative shrink-0 ${iconSize} flex items-center justify-center rounded-xl bg-linear-to-br from-bg-secondary to-bg-tertiary border border-indigo-500/10 overflow-hidden shadow-inner text-slate-500`">
+                :class="`relative shrink-0 ${iconSize} flex items-center justify-center rounded-xl bg-slate-50 dark:bg-linear-to-br dark:from-bg-secondary dark:to-bg-tertiary border border-slate-100 dark:border-indigo-500/10 overflow-hidden shadow-inner text-slate-400 dark:text-slate-500`">
                 <component :is="iconComponent" :caseId="id || algorithm.id || algorithm.name" :caseName="algorithm.name"
                     :type="algorithmType" />
             </div>
 
             <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 mb-2">
-                    <h4 class="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
+                    <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
                         {{ algorithm.name || ('F2L ' + (id || algorithm.id)) }}
                     </h4>
                 </div>
 
                 <!-- Setup Info -->
                 <div v-if="algorithm.setup"
-                    class="flex items-center gap-2 bg-slate-800/40 px-2 py-1.5 rounded-lg border border-slate-700/50">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-orange-400 shrink-0">Setup</span>
-                    <code class="text-xs font-mono text-slate-300">{{ algorithm.setup }}</code>
+                    class="flex items-center gap-2 bg-slate-50 dark:bg-slate-800/40 px-2 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700/50">
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-orange-500 dark:text-orange-400 shrink-0">Setup</span>
+                    <code class="text-xs font-mono text-slate-600 dark:text-slate-300">{{ algorithm.setup }}</code>
                 </div>
             </div>
         </div>
@@ -29,11 +29,11 @@
         <!-- Slot Switcher Tabs (Segmented Control style) -->
         <div class="flex justify-center mb-6">
             <div
-                class="inline-flex p-1 bg-slate-950/80 backdrop-blur-md rounded-full border border-indigo-500/10 shadow-xl shadow-black/20">
+                class="inline-flex p-1 bg-slate-100 dark:bg-slate-950/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-indigo-500/10 shadow-xl dark:shadow-black/20">
                 <button v-for="slot in slots" :key="slot.key" @click="activeSlot = slot.key" :class="[
                     activeSlot === slot.key
                         ? 'bg-indigo-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.4)] scale-110 z-10'
-                        : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
+                        : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5'
                 ]"
                     class="w-12 h-8 flex items-center justify-center rounded-full text-xs font-black transition-all duration-300 transform-gpu">
                     {{ slot.label }}
@@ -47,13 +47,13 @@
                 <div v-for="(algo, index) in currentAlgos" :key="index" class="relative">
                     <!-- Algorithm Index Label (if multiple) -->
                     <div v-if="currentAlgos.length > 1"
-                        class="absolute -top-2 left-3 px-1.5 py-0.5 bg-slate-900 text-[8px] font-bold text-indigo-400 rounded border border-indigo-500/20 z-10 uppercase tracking-widest">
+                        class="absolute -top-2 left-3 px-1.5 py-0.5 bg-white dark:bg-slate-900 text-[8px] font-bold text-indigo-600 dark:text-indigo-400 rounded border border-indigo-200 dark:border-indigo-500/20 z-10 uppercase tracking-widest">
                         Option {{ index + 1 }}
                     </div>
 
                     <div class="group/algo relative">
                         <div
-                            class="text-sm p-3 pt-4 rounded-xl break-all leading-relaxed font-mono bg-bg-primary text-indigo-100 border border-indigo-500/20 shadow-inner group-hover/algo:border-indigo-500/40 transition-colors">
+                            class="text-sm p-3 pt-4 rounded-xl break-all leading-relaxed font-mono bg-slate-50 dark:bg-bg-primary text-slate-800 dark:text-indigo-100 border border-slate-200 dark:border-indigo-500/20 shadow-inner group-hover/algo:border-indigo-500/40 transition-colors">
                             {{ algo }}
                         </div>
 
@@ -71,13 +71,13 @@
         </div>
 
         <!-- Footer Decoration -->
-        <div class="mt-4 pt-3 border-t border-slate-800/50 flex justify-between items-center">
+        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/50 flex justify-between items-center">
             <div class="flex gap-1">
                 <div class="w-1.5 h-1.5 rounded-full bg-indigo-500/30"></div>
                 <div class="w-1.5 h-1.5 rounded-full bg-indigo-500/20"></div>
                 <div class="w-1.5 h-1.5 rounded-full bg-indigo-500/10"></div>
             </div>
-            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{{slots.find(s => s.key ===
+            <span class="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">{{slots.find(s => s.key ===
                 activeSlot)?.fullName}} SLOT</span>
         </div>
     </div>
@@ -137,9 +137,3 @@ const currentAlgos = computed(() => {
     return Object.values(data)
 })
 </script>
-
-<style scoped>
-.bg-card-gradient {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
-}
-</style>

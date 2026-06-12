@@ -6,15 +6,19 @@
                     <path d="M 0 0 L 4 2 L 0 4 Z" fill="#000000" />
                 </marker>
             </defs>
+            <path :d="cubeOutline" fill="var(--cube-border)" />
             <g>
+                
                 <path v-for="(s, i) in topStickers" :key="'t' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
             </g>
             <g>
+                
                 <path v-for="(s, i) in leftStickers" :key="'l' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
             </g>
             <g>
+                
                 <path v-for="(s, i) in rightStickers" :key="'r' + i" :d="s.path" :fill="s.color" stroke="#000"
                     stroke-width="0.5" />
             </g>
@@ -52,7 +56,7 @@ const colors = {
     blue: '#2040d0',
     green: '#11aa00',
     white: '#ffffff',
-    blank: '#334155',
+    blank: 'var(--sticker-blank)',
     border: '#0f172a'
 }
 
@@ -581,6 +585,11 @@ const arrows = computed(() => {
         res.push({ d: `M ${pStart.x} ${pStart.y} Q ${control.x} ${control.y} ${pEnd.x} ${pEnd.y}` })
     }
     return res
+})
+
+const cubeOutline = computed(() => {
+    const { A, B, C, D, E, F, G } = pts.value
+    return `M ${A.x} ${A.y} L ${B.x} ${B.y} L ${G.x} ${G.y} L ${F.x} ${F.y} L ${E.x} ${E.y} L ${D.x} ${D.y} Z`
 })
 
 const interp = (p1, p2, r) => ({

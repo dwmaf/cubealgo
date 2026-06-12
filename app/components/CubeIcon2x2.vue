@@ -3,28 +3,28 @@
         <svg viewBox="0 0 120 120" class="w-full h-full">
             <g transform="translate(20, 20)">
                 <rect v-for="(active, i) in topStickers" :key="i" :x="(i % 2) * 42" :y="Math.floor(i / 2) * 42"
-                    width="38" height="38" rx="6" :fill="active ? '#ffff00' : '#1e293b'" stroke="#0a0a0f"
+                    width="38" height="38" rx="6" :fill="active ? colors.yellow : colors.blank" stroke="#0a0a0f"
                     stroke-width="2" />
 
                 <rect v-if="sideStickers.back[0]" x="4" y="-10" width="30" height="8" rx="2"
-                    :fill="sideStickers.back[0]" />
+                    :fill="sideStickers.back[0]" stroke="#0a0a0f"/>
                 <rect v-if="sideStickers.back[1]" x="46" y="-10" width="30" height="8" rx="2"
-                    :fill="sideStickers.back[1]" />
+                    :fill="sideStickers.back[1]" stroke="#0a0a0f"/>
 
                 <rect v-if="sideStickers.front[0]" x="4" y="82" width="30" height="8" rx="2"
-                    :fill="sideStickers.front[0]" />
+                    :fill="sideStickers.front[0]" stroke="#0a0a0f"/>
                 <rect v-if="sideStickers.front[1]" x="46" y="82" width="30" height="8" rx="2"
-                    :fill="sideStickers.front[1]" />
+                    :fill="sideStickers.front[1]" stroke="#0a0a0f"/>
 
                 <rect v-if="sideStickers.left[0]" x="-10" y="4" width="8" height="30" rx="2"
-                    :fill="sideStickers.left[0]" />
+                    :fill="sideStickers.left[0]" stroke="#0a0a0f"/>
                 <rect v-if="sideStickers.left[1]" x="-10" y="46" width="8" height="30" rx="2"
-                    :fill="sideStickers.left[1]" />
+                    :fill="sideStickers.left[1]" stroke="#0a0a0f"/>
 
                 <rect v-if="sideStickers.right[0]" x="82" y="4" width="8" height="30" rx="2"
-                    :fill="sideStickers.right[0]" />
+                    :fill="sideStickers.right[0]" stroke="#0a0a0f"/>
                 <rect v-if="sideStickers.right[1]" x="82" y="46" width="8" height="30" rx="2"
-                    :fill="sideStickers.right[1]" />
+                    :fill="sideStickers.right[1]" stroke="#0a0a0f"/>
             </g>
 
         </svg>
@@ -48,7 +48,7 @@ const colors = {
     orange: '#ee8800',
     blue: '#2040d0',
     green: '#11aa00',
-    blank: '#1e293b'
+    blank: 'var(--sticker-blank)'
 }
 
 const topStickers = computed(() => {

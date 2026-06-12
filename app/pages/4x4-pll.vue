@@ -1,29 +1,29 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-2">
+    <div class="w-full max-w-7xl mx-auto px-6">
 
-        <AlgorithmPageHeader cube-size="4x4" algorithm-type="PLL Parity"
+        <LazyAlgorithmPageHeader cube-size="4x4" algorithm-type="PLL Parity"
             description="Algoritma untuk mengatasi PLL parity yang unik di Rubik's Cube 4x4. Terjadi ketika dua edge piece yang perlu di-swap."
             :show-timer-button="false" />
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="PLL Parity Cases" :algorithm-count="22" />
+            <LazyAlgorithmSectionHeader title="PLL Parity Cases" :algorithm-count="22" />
 
             <div
-                class="sticky top-[88px] z-40 my-8 mx-auto w-fit p-4 rounded-xl bg-[#0a0a0f]/80 backdrop-blur-md border border-indigo-500/20 shadow-xl text-center font-mono text-sm sm:text-base text-indigo-400">
+                class="sticky top-22 z-40 my-8 mx-auto w-fit p-4 rounded-xl bg-white/80 dark:bg-bg-primary/80 backdrop-blur-md border border-slate-200 dark:border-indigo-500/20 shadow-xl text-center font-mono text-sm sm:text-base text-indigo-600 dark:text-indigo-400">
                 <span class="text-slate-500 block sm:inline mb-1 sm:mb-0 sm:mr-2">Main PLL Parity [*] :</span>
                 2R2 U2 2R2 Uw2 2R2 Uw2
             </div>
 
 
             <div class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AlgorithmCard v-for="algo in pllParityAlgorithms" :key="algo.name" :algorithm="algo"
+                <LazyAlgorithmCard v-for="algo in pllParityAlgorithms" :key="algo.name" :algorithm="algo"
                     :icon-component="CubeIcon4x4" algorithm-type="PLL" icon-size="w-[100px] h-[100px]" />
             </div>
         </section>
         <section class="py-12">
-            <AlgorithmSectionHeader title="Notasi Bantuan" />
+            <LazyAlgorithmSectionHeader title="Notasi Bantuan" />
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <NotationCard v-for="notation in helperNotations" :key="notation.symbol" :title="notation.symbol"
+                <LazyNotationCard v-for="notation in helperNotations" :key="notation.symbol" :title="notation.symbol"
                     :description="notation.description" :icon-component="CubeIcon3D"
                     :icon-props="{ notation: notation.symbol, size: notation.size }" />
             </div>
@@ -31,15 +31,15 @@
 
         <section id="understanding" class="py-12">
 
-            <AlgorithmSectionHeader title="Memahami PLL Parity" />
+            <LazyAlgorithmSectionHeader title="Memahami PLL Parity" />
             <div class="grid gap-6 grid-cols-1 md:grid-cols-3">
-                <AppCard title="Apa itu PLL Parity?" title-class="text-lg text-indigo-500"
+                <LazyAppCard title="Apa itu PLL Parity?" title-class="text-lg text-indigo-500"
                     description="PLL Parity adalah kondisi di mana dua edge piece yang bersebelahan perlu di-swap, yang tidak mungkin dilakukan dengan algoritma 3x3 standar." />
 
-                <AppCard title="Tanda-tanda PLL Parity" title-class="text-lg text-indigo-500"
+                <LazyAppCard title="Tanda-tanda PLL Parity" title-class="text-lg text-indigo-500"
                     description="Anda memiliki PLL parity ketika semua corner sudah benar posisinya, tapi ada dua edge yang perlu ditukar posisinya." />
 
-                <AppCard title="Tips Mengingat" title-class="text-lg text-indigo-500"
+                <LazyAppCard title="Tips Mengingat" title-class="text-lg text-indigo-500"
                     description='Bayangkan algoritma sebagai "r2 U2" berulang dengan variasi. Latih perlahan sampai muscle memory terbentuk.' />
             </div>
         </section>

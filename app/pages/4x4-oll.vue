@@ -1,43 +1,43 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-2">
-        <AlgorithmPageHeader cube-size="4x4" algorithm-type="OLL Parity" description="Algoritma khusus untuk mengatasi OLL parity yang hanya terjadi di Rubik's Cube 4x4. Parity terjadi
+    <div class="w-full max-w-7xl mx-auto px-6">
+        <LazyAlgorithmPageHeader cube-size="4x4" algorithm-type="OLL Parity" description="Algoritma khusus untuk mengatasi OLL parity yang hanya terjadi di Rubik's Cube 4x4. Parity terjadi
                 karena reduksi center dan edge pairing." :show-timer-button="false" />
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="OLL Parity Cases" :algorithm-count="27" />
+            <LazyAlgorithmSectionHeader title="OLL Parity Cases" :algorithm-count="27" />
             <div
-                class="sticky top-[88px] z-40 my-8 mx-auto w-fit p-4 rounded-xl bg-[#0a0a0f]/80 backdrop-blur-md border border-indigo-500/20 shadow-xl text-center font-mono text-sm sm:text-base text-indigo-400">
+                class="sticky top-22 z-40 my-8 mx-auto w-fit p-4 rounded-xl bg-white/80 dark:bg-bg-primary/80 backdrop-blur-md border border-slate-200 dark:border-indigo-500/20 shadow-xl text-center font-mono text-sm sm:text-base text-indigo-600 dark:text-indigo-400">
                 <span class="text-slate-500 block sm:inline mb-1 sm:mb-0 sm:mr-2">Main OLL Parity [*] :</span>
                 r U2 x r U2 r U2 r' U2 l U2 r' U2 r U2 r' U2 r'
             </div>
 
             <div class="grid gap-4 py-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AlgorithmCard v-for="algo in ollParityAlgorithms" :key="algo.name" :algorithm="algo"
+                <LazyAlgorithmCard v-for="algo in ollParityAlgorithms" :key="algo.name" :algorithm="algo"
                     :icon-component="CubeIcon4x4" algorithm-type="OLL" icon-size="w-[100px] h-[100px]" />
             </div>
         </section>
         
         <section class="py-12">
-            <AlgorithmSectionHeader title="Notasi Bantuan" />
+            <LazyAlgorithmSectionHeader title="Notasi Bantuan" />
 
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <NotationCard v-for="notation in helperNotations" :key="notation.symbol" :title="notation.symbol"
+                <LazyNotationCard v-for="notation in helperNotations" :key="notation.symbol" :title="notation.symbol"
                     :description="notation.description" :icon-component="CubeIcon3D"
                     :icon-props="{ notation: notation.symbol, size: notation.size }" />
             </div>
         </section>
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="Memahami OLL Parity" />
+            <LazyAlgorithmSectionHeader title="Memahami OLL Parity" />
 
             <div class="grid gap-6 grid-cols-1 md:grid-cols-3">
-                <AppCard title="Apa itu OLL Parity?" title-class="text-lg text-indigo-500"
+                <LazyAppCard title="Apa itu OLL Parity?" title-class="text-lg text-indigo-600 dark:text-indigo-500"
                     description="OLL Parity adalah kondisi di mana satu edge di layer teratas memiliki orientasi yang salah (flipped), yang tidak mungkin terjadi pada cube 3x3 standar." />
 
-                <AppCard title="Mengapa Terjadi?" title-class="text-lg text-indigo-500"
+                <LazyAppCard title="Mengapa Terjadi?" title-class="text-lg text-indigo-600 dark:text-indigo-500"
                     description="Parity terjadi karena proses reduksi (menyatukan center dan edge) pada 4x4 bisa menghasilkan state yang 'impossible' jika dilihat sebagai 3x3." />
 
-                <AppCard title="Kapan Menggunakan?" title-class="text-lg text-indigo-500"
+                <LazyAppCard title="Kapan Menggunakan?" title-class="text-lg text-indigo-600 dark:text-indigo-500"
                     description="Gunakan algoritma ini ketika Anda sampai pada langkah OLL dan menemukan satu edge yang flipped secara individual." />
             </div>
         </section>

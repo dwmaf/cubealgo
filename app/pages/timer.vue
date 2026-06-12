@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-5xl mx-auto px-2 py-8">
+    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8">
         <!-- Header -->
         <section class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-extrabold mb-3">
@@ -12,12 +12,12 @@
 
         <!-- Cube Size Selector -->
         <div class="max-w-md mx-auto mb-8">
-            <div class="flex items-center justify-center gap-3 p-2 rounded-2xl bg-slate-900/50 border border-slate-800">
+            <div class="flex items-center justify-center gap-3 p-2 rounded-2xl bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800">
                 <button v-for="size in cubeTypes" :key="size.value" @click="selectCubeType(size.value)" :class="[
                     'flex-1 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300',
                     selectedCube === size.value
-                        ? 'bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-500/25'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                        ? 'bg-linear-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-500/25'
+                        : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-800/50'
                 ]">
                     {{ size.label }}
                 </button>
@@ -26,15 +26,15 @@
 
         <!-- Main Timer Card -->
         <div class="max-w-2xl mx-auto mb-8">
-            <div class="p-8 rounded-3xl bg-card-gradient border border-indigo-500/15 text-center">
+            <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-indigo-500/15 text-center">
                 <!-- Scramble Display -->
-                <div class="mb-8 p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
-                    <p class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-bold">Scramble</p>
-                    <p class="text-base md:text-lg font-mono text-white leading-relaxed break-words">
+                <div class="mb-8 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+                    <p class="text-xs uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 font-bold">Scramble</p>
+                    <p class="text-base md:text-lg font-mono text-slate-800 dark:text-white leading-relaxed wrap-break-word">
                         {{ currentScramble }}
                     </p>
                     <button @click="generateScramble"
-                        class="mt-4 px-4 py-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 text-sm font-bold transition-all duration-300 border border-indigo-500/20">
+                        class="mt-4 px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-bold transition-all duration-300 border border-indigo-100 dark:border-indigo-500/20">
                         🔄 New Scramble
                     </button>
                 </div>
@@ -42,10 +42,10 @@
                 <!-- Timer Display -->
                 <div class="mb-6">
                     <div class="text-6xl md:text-7xl font-bold font-mono mb-2"
-                        :class="timerState === 'running' ? 'text-gradient' : 'text-white'">
+                        :class="timerState === 'running' ? 'text-gradient' : 'text-slate-900 dark:text-white'">
                         {{ formattedTime }}
                     </div>
-                    <p class="text-xs text-slate-500 uppercase tracking-widest">
+                    <p class="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                         {{ timerStateText }}
                     </p>
                 </div>
@@ -53,11 +53,11 @@
                 <!-- Control Buttons -->
                 <div class="flex justify-center gap-4">
                     <button v-if="timerState === 'idle'" @click="startTimer"
-                        class="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:scale-105">
+                        class="px-8 py-3 rounded-xl bg-linear-to-r from-indigo-500 to-violet-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:scale-105">
                         ▶ Start
                     </button>
                     <button v-if="timerState === 'running'" @click="stopTimer"
-                        class="px-8 py-3 rounded-xl bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:scale-105">
+                        class="px-8 py-3 rounded-xl bg-linear-to-r from-red-500 to-pink-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:scale-105">
                         ⏸ Stop
                     </button>
                     <button v-if="timerState === 'stopped'" @click="resetTimer"
@@ -65,15 +65,15 @@
                         🔄 Reset
                     </button>
                     <button v-if="timerState === 'stopped'" @click="saveTime"
-                        class="px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:scale-105">
+                        class="px-8 py-3 rounded-xl bg-linear-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:scale-105">
                         💾 Save Time
                     </button>
                 </div>
 
                 <!-- Keyboard Hint -->
-                <p class="mt-6 text-xs text-slate-500">
+                <p class="mt-6 text-xs text-slate-400 dark:text-slate-500">
                     💡 Tip: Tekan <kbd
-                        class="px-2 py-1 rounded bg-slate-800 border border-slate-700 font-mono text-slate-300">Space</kbd>
+                        class="px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-slate-600 dark:text-slate-300">Space</kbd>
                     untuk start/stop timer
                 </p>
             </div>
@@ -82,7 +82,7 @@
         <!-- Statistics & History -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Statistics Card -->
-            <div class="p-6 rounded-2xl bg-card-gradient border border-indigo-500/15">
+            <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-indigo-500/15">
                 <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
                     <span class="text-2xl">📊</span>
                     Statistics ({{ selectedCubeLabel }})
@@ -90,7 +90,7 @@
                 <div class="space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-sm text-slate-400">Total Solves</span>
-                        <span class="text-lg font-bold text-white">{{ currentHistory.length }}</span>
+                        <span class="text-lg font-bold text-slate-900 dark:text-white">{{ currentHistory.length }}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm text-slate-400">Best Time</span>
@@ -108,7 +108,7 @@
             </div>
 
             <!-- History Card -->
-            <div class="p-6 rounded-2xl bg-card-gradient border border-indigo-500/15">
+            <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-indigo-500/15">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-bold flex items-center gap-2">
                         <span class="text-2xl">📜</span>
@@ -124,10 +124,10 @@
                 </div>
                 <div v-else class="space-y-2 max-h-64 overflow-y-auto">
                     <div v-for="(solve, index) in recentSolves" :key="index"
-                        class="flex justify-between items-center p-3 rounded-lg bg-slate-900/30 hover:bg-slate-900/50 transition-colors">
-                        <span class="text-xs text-slate-500 font-mono">#{{ currentHistory.length - index }}</span>
+                        class="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-900/30 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-colors">
+                        <span class="text-xs text-slate-400 dark:text-slate-500 font-mono">#{{ currentHistory.length - index }}</span>
                         <span class="text-sm font-bold font-mono"
-                            :class="solve.time === bestTimeMs ? 'text-emerald-400' : 'text-white'">
+                            :class="solve.time === bestTimeMs ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-white'">
                             {{ formatTime(solve.time) }}
                         </span>
                         <button @click="removeSolve(index)"

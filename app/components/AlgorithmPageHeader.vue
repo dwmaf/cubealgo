@@ -1,16 +1,16 @@
 <template>
     <section class="py-16 pb-12 text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-slate-900 dark:text-white">
             <span v-if="cubeSize" class="mr-1 md:mr-2">{{ cubeSize }}</span><span class="text-gradient">{{ algorithmType
                 }}</span><span v-if="suffix" class="ml-2">{{ suffix }}</span>
         </h1>
-        <p class="text-lg text-slate-400 max-w-xl mx-auto">
+        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
             {{ description }}
         </p>
 
         <div v-if="showTimerButton" class="mt-8">
             <NuxtLink :to="`/timer?cube=${timerCubeParam}`"
-                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:scale-105">
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-indigo-500 to-violet-500 text-white font-bold text-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:scale-105">
                 <span>⏱️</span>
                 <span>Practice with Timer</span>
             </NuxtLink>

@@ -1,14 +1,14 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-2">
-        <AlgorithmPageHeader cube-size="3x3" algorithm-type="PLL Algorithms"
+    <div class="w-full max-w-7xl mx-auto px-6">
+        <LazyAlgorithmPageHeader cube-size="3x3" algorithm-type="PLL Algorithms"
             description="Permutation of Last Layer - 21 algoritma untuk memposisikan semua piece di layer teratas dengan benar."
             timer-cube-param="3x3" />
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="All PLL Cases" :algorithm-count="21" />
+            <LazyAlgorithmSectionHeader title="All PLL Cases" :algorithm-count="21" />
 
             <div class="grid gap-4 py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AlgorithmCard v-for="algo in pllAlgorithms" :key="algo.name" :algorithm="algo" :icon-component="CubeIcon3x3"
+                <LazyAlgorithmCard v-for="algo in pllAlgorithms" :key="algo.name" :algorithm="algo" :icon-component="CubeIcon3x3"
                     algorithm-type="PLL" />
             </div>
         </section>

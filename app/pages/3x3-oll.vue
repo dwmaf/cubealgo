@@ -1,28 +1,28 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-2">
-        <AlgorithmPageHeader cube-size="3x3" algorithm-type="OLL Algorithms"
+    <div class="w-full max-w-7xl mx-auto px-6">
+        <LazyAlgorithmPageHeader cube-size="3x3" algorithm-type="OLL Algorithms"
             description="Orientation of Last Layer - 57 algoritma untuk mengorientasikan semua stiker kuning di layer teratas."
             timer-cube-param="3x3" />
 
         <section class="py-12">
-            <AlgorithmSectionHeader :title="sortBy === 'number' ? 'All OLL Cases' : 'Grouped by Shape'"
+            <LazyAlgorithmSectionHeader :title="sortBy === 'number' ? 'All OLL Cases' : 'Grouped by Shape'"
                 :algorithm-count="57">
-                <div class="flex bg-slate-800/50 ml-4 p-1 rounded-xl border border-slate-700/50">
+                <div class="flex bg-slate-100 dark:bg-slate-800/50 ml-4 p-1 rounded-xl border border-slate-200 dark:border-slate-700/50">
                     <button @click="sortBy = 'number'"
-                        :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:text-white']"
+                        :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
                         class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
                         By Number
                     </button>
                     <button @click="sortBy = 'shape'"
-                        :class="[sortBy === 'shape' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:text-white']"
+                        :class="[sortBy === 'shape' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
                         class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
                         By Shape
                     </button>
                 </div>
-            </AlgorithmSectionHeader>
+            </LazyAlgorithmSectionHeader>
 
             <div v-if="sortBy === 'number'" class="grid gap-4 py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AlgorithmCard v-for="oll in ollAlgorithms" :key="oll.id" :algorithm="{ ...oll, name: `OLL ${oll.id}` }"
+                <LazyAlgorithmCard v-for="oll in ollAlgorithms" :key="oll.id" :algorithm="{ ...oll, name: `OLL ${oll.id}` }"
                     :icon-component="CubeIcon3x3" algorithm-type="OLL" />
             </div>
 
@@ -39,7 +39,7 @@
                     </h3>
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                         <template v-for="id in group.list" :key="id">
-                            <AlgorithmCard v-if="getOllById(id)" :algorithm="{ ...getOllById(id), name: `OLL ${id}` }"
+                            <LazyAlgorithmCard v-if="getOllById(id)" :algorithm="{ ...getOllById(id), name: `OLL ${id}` }"
                                 :icon-component="CubeIcon3x3" algorithm-type="OLL" />
                         </template>
                     </div>
@@ -75,9 +75,9 @@ const ollAlgorithms = [
     { id: 15, setup_name: "OLL 14", setup: "L' U' L U L F' L' F L' U' L U' L' U2 L", algorithm: "L F' L' U' L U F L' U L U2 L'" },
     { id: 16, setup_name: "OLL 13", setup: "R U R' U' R' F R F' R U R' U R U2 R'", algorithm: "R' F R U R' U' F' R U' R' U2 R" },
     { id: 17, setup_name: "OLL 19", setup: "R' U2 F (R U R' U') F2 U2 F R", algorithm: "(R U R' U R') (F R F') U2 R' (F R F')" },
-    { id: 18, setup_name: "OLL 17", setup: "(R U R' U R') (F R F') U2 R' (F R F')", algorithm: "r U R' U R U2 r' U2 R U2 R' U2 R' F R F'" },
-    { id: 19, setup_name: "OLL 18", setup: "r U R' U R U2 r' U2 R U2 R' U2 R' F R F'", algorithm: "R' U2 F (R U R' U') F2 U2 F R" },
-    { id: 20, setup: "R U2 R' F R' F' R2 U2 R' F R' F' R U R U' R'", algorithm: "R U R' U' R' F R F' R U2 R2 F R F' R U2 R'" },
+    { id: 18, setup_name: "OLL 17", setup: "(R U R' U R') (F R F') U2 R' (F R F')", algorithm: "y R U2 R2 F R F' U2 M' U R U' r'" },
+    { id: 19, setup: "R' F' U2 F2 U R U' R' F' U2 R", algorithm: "R' U2 F (R U R' U') F2 U2 F R" },
+    { id: 20, setup: "r U R' U' M2' U R U' R' U' M'", algorithm: "(r U R' U') M2 (U R U' R') U' M'" },
     { id: 21, setup: "Same as Algo", algorithm: "R U2 R' U' R U R' U' R U' R'" },
     { id: 22, setup: "R U2 (R2' U') (R2 U') R2' U2 R", algorithm: "R U R' U F' R U2 R' U2 R' F R" },
     { id: 23, setup: "R U2' R D R' U2' R D' R2'", algorithm: "R2 D (R' U2 R) D' (R' U2 R')" },
@@ -85,17 +85,17 @@ const ollAlgorithms = [
     { id: 25, setup_name: "OLL 24", setup: "r U R' U' r' F R F'", algorithm: "F R' F' r U R U' r'" },
     { id: 26, setup_name: "Sune", setup: "R U R' U R U2 R'", algorithm: "R U2 R' U' R U' R'" },
     { id: 27, setup_name: "Antisune", setup: "R U2 R' U' R U' R'", algorithm: "R U R' U R U2 R'" },
-    { id: 28, setup_name: "OLL 57", setup: "(R U R' U') M' (U R U' r')", algorithm: "F R U R' U' F' U2 F R U R' U' F'" },
+    { id: 28, setup_name: "OLL 57", setup: "(R U R' U') M' (U R U' r')", algorithm: "r U R' U' M U R U' R'" },
     { id: 29, setup: "F' (U' L' U2 L) (U' L' U2 L) U F", algorithm: "F' U' (L' U2 L U) (L' U2 L U) F" },
     { id: 30, setup: "F (U R U2' R') (U R U2' R') U' F'", algorithm: "F U (R U2 R' U') (R U2 R' U') F'" },
     { id: 31, setup_name: "OLL 40", setup: "R' F R U R' U' F' U R", algorithm: "R' U' F U R U' R' F' R" },
     { id: 32, setup_name: "OLL 39", setup: "L F' L' U' L U F U' L'", algorithm: "L U F' U' L' U L F L'" },
     { id: 33, setup_name: "OLL 37", setup: "F R U' R' U' R U R' F'", algorithm: "R U R' U' R' F R F'" },
-    { id: 34, setup: "F U R' U' R' F' R U R2' U' R'", algorithm: "R U R2 U' R' F R U R U' F'" },
+    { id: 34, setup: "F U R' U' R' F' R U R2' U' R'", algorithm: "F R U R' U' R' F' r U R U' r'" },
     { id: 35, setup: "R U2' R' F R' F' R2' U2' R'", algorithm: "R U2 R2 F R F' R U2 R'" },
-    { id: 36, setup: "F' L F (L' U' L' U') (L U L' U L)", algorithm: "(L' U' L U' L') U L U L (F' L' F)" },
+    { id: 36, setup: "F' L F L' U' (L' U' L) U (L' U L)", algorithm: "(L' U' L) U' (L' U L) U L F' L' F" },
     { id: 37, setup_name: "OLL 33", setup: "R U R' U' R' F R F'", algorithm: "F (R U' R' U' R) U R' F'" },
-    { id: 38, setup: "F R' F' R U R U R' U' R U' R'", algorithm: "(R U R' U R) (U' R' U' R') (F R F')" },
+    { id: 38, setup: "F R' F' R U (R U R') U' (R U' R')", algorithm: "(R U R') U (R U' R') U' R' F R F'" },
     { id: 39, setup_name: "OLL 32", setup: "L U F' U' L' U L F L'", algorithm: "L F' L' U' L U F U' L'" },
     { id: 40, setup_name: "OLL 31", setup: "R' U' F U R U' R' F' R", algorithm: "R' F R U R' U' F' U R" },
     { id: 41, setup: "F U R U' R' F' (R U2' R' U' R U' R')", algorithm: "(R U R' U R U2 R') F (R U R' U') F'" },
@@ -109,7 +109,7 @@ const ollAlgorithms = [
     { id: 49, setup: "F' U' L' U L F L' U' L U' L' U2 L", algorithm: "L' U2 L U L' U L F' L' U' L U F" },
     { id: 50, setup: "F U R U' R' F' R U R' U R U2 R'", algorithm: "R U2 R' U' R U' R' F R U R' U' F'" },
     { id: 51, setup_name: "OLL 48", setup: "F (R U R' U') (R U R' U') F'", algorithm: "f (R U R' U') (R U R' U') f'" },
-    { id: 52, setup: "R U R' U R U2 R' U' f R U R' U' f' (U')", algorithm: "R U R' U R U2 R' U' f R U R' U' f'" },
+    { id: 52, setup: "R U R' U R U2 R' U' f R U R' U' f'", algorithm: "R U R' U R U2 R' U' f R U R' U' f'" },
     { id: 53, setup: "Same as Algo", algorithm: "r' U' (R U' R') U (R U' R') U2 r" },
     { id: 54, setup: "Same as Algo", algorithm: "r U (R' U R) U' (R' U R) U2 r'" },
     { id: 55, setup: "F R' F' U2' R U R' U R2' U2' R'", algorithm: "R U2 R2 (U' R U' R') U2 (F R F')" },

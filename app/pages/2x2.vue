@@ -1,23 +1,23 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-2">
-        <AlgorithmPageHeader cube-size="2x2" algorithm-type="OLL & PBL Algorithms"
+    <div class="w-full max-w-7xl mx-auto px-6">
+        <LazyAlgorithmPageHeader cube-size="2x2" algorithm-type="OLL & PBL Algorithms"
             description="Kumpulan algoritma lengkap untuk menyelesaikan Rubik's Cube 2x2 menggunakan metode Ortega."
             timer-cube-param="2x2" />
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="2x2 OLL Cases" :algorithm-count="7"/>
+            <LazyAlgorithmSectionHeader title="2x2 OLL Cases" :algorithm-count="7"/>
 
             <div class="grid gap-4 py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AlgorithmCard v-for="algo in oll2x2" :key="algo.name" :algorithm="algo" :icon-component="CubeIcon2x2"
+                <LazyAlgorithmCard v-for="algo in oll2x2" :key="algo.name" :algorithm="algo" :icon-component="CubeIcon2x2"
                     algorithm-type="OLL" />
             </div>
         </section>
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="2x2 PBL Cases" :algorithm-count="2" />
+            <LazyAlgorithmSectionHeader title="2x2 PBL Cases" :algorithm-count="2" />
 
             <div class="grid gap-4 py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AlgorithmCard v-for="algo in pbl2x2" :key="algo.name" :algorithm="algo" :icon-component="CubeIcon2x2"
+                <LazyAlgorithmCard v-for="algo in pbl2x2" :key="algo.name" :algorithm="algo" :icon-component="CubeIcon2x2"
                     algorithm-type="PBL" algorithm-class="p-3" />
             </div>
         </section>

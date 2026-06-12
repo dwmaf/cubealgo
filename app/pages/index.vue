@@ -1,22 +1,21 @@
 <template>
     <div class="w-full max-w-7xl mx-auto px-6">
         <section class="py-16 pb-12 text-center">
-
-            <AlgorithmPageHeader cube-size="Master" algorithm-type="Rubik's Cube" suffix="Algorithms" description="Panduan lengkap notasi dan algoritma untuk menyelesaikan Rubik's Cube 3x3 dan 4x4. Pelajari OLL, PLL,
+            <LazyAlgorithmPageHeader cube-size="Master" algorithm-type="Rubik's Cube" suffix="Algorithms" description="Panduan lengkap notasi dan algoritma untuk menyelesaikan Rubik's Cube 3x3 dan 4x4. Pelajari OLL, PLL,
                 dan teknik speedcubing lainnya." :show-timer-button="false" />
 
             <div
                 class="mt-10 mx-auto max-w-2xl p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/10 flex flex-col sm:flex-row items-center gap-4 text-left">
                 <div
-                    class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/10 text-2xl">
+                    class="shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/10 text-2xl">
                     📲
                 </div>
                 <div class="flex-1">
-                    <p class="text-sm font-bold text-white mb-1">Eits, CubeAlgo Bisa Offline!</p>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        Klik ikon <span class="text-indigo-400 font-bold italic">"Install App"</span> di browser Anda
+                    <p class="text-sm font-bold text-slate-900 dark:text-white mb-1">Eits, CubeAlgo Bisa Offline!</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-500 leading-relaxed">
+                        Klik ikon <span class="text-indigo-600 dark:text-indigo-400 font-bold italic">"Install App"</span> di browser Anda
                         untuk memasang CubeAlgo di HP/Laptop. Setelah terpasang, ratusan algoritma ini bisa diakses
-                        <span class="text-slate-300 underline decoration-indigo-500/30">tanpa sinyal internet
+                        <span class="text-slate-700 dark:text-slate-300 underline decoration-indigo-500/30">tanpa sinyal internet
                             sekalipun.</span>
                     </p>
                 </div>
@@ -26,7 +25,7 @@
 
         <section class="py-8">
             <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AppCard :is-link="true" to="/2x2" tag="2x2" tag-class="bg-emerald-500/15 text-emerald-500"
+                <LazyAppCard :is-link="true" to="/2x2" tag="2x2" tag-class="bg-emerald-500/15 text-emerald-500"
                     title="2x2 OLL & PBL"
                     description="Metode Ortega: 7 OLL dan 2 PBL untuk menyelesaikan 2x2 dengan cepat." hover
                     show-top-bar>
@@ -35,9 +34,9 @@
                         <span>•</span>
                         <span>Beginner</span>
                     </template>
-                </AppCard>
+                </LazyAppCard>
 
-                <AppCard :is-link="true" to="/3x3-oll" tag="3x3" tag-class="bg-indigo-500/15 text-indigo-500"
+                <LazyAppCard :is-link="true" to="/3x3-oll" tag="3x3" tag-class="bg-indigo-500/15 text-indigo-500"
                     title="3x3 OLL - Orientation of Last Layer"
                     description="Algoritma untuk mengorientasikan semua stiker kuning di layer teratas." hover
                     show-top-bar>
@@ -46,9 +45,9 @@
                         <span>•</span>
                         <span>Intermediate</span>
                     </template>
-                </AppCard>
+                </LazyAppCard>
 
-                <AppCard :is-link="true" to="/3x3-pll" tag="3x3" tag-class="bg-indigo-500/15 text-indigo-500"
+                <LazyAppCard :is-link="true" to="/3x3-pll" tag="3x3" tag-class="bg-indigo-500/15 text-indigo-500"
                     title="3x3 PLL - Permutation of Last Layer"
                     description="Algoritma untuk memposisikan semua piece di layer teratas dengan benar." hover
                     show-top-bar>
@@ -57,9 +56,9 @@
                         <span>•</span>
                         <span>Intermediate</span>
                     </template>
-                </AppCard>
+                </LazyAppCard>
 
-                <AppCard :is-link="true" to="/4x4-oll" tag="4x4" tag-class="bg-violet-500/15 text-violet-500"
+                <LazyAppCard :is-link="true" to="/4x4-oll" tag="4x4" tag-class="bg-violet-500/15 text-violet-500"
                     title="4x4 OLL Parity"
                     description="Algoritma khusus untuk mengatasi OLL parity yang hanya terjadi di 4x4." hover
                     show-top-bar>
@@ -68,9 +67,9 @@
                         <span>•</span>
                         <span>Advanced</span>
                     </template>
-                </AppCard>
+                </LazyAppCard>
 
-                <AppCard :is-link="true" to="/4x4-pll" tag="4x4" tag-class="bg-violet-500/15 text-violet-500"
+                <LazyAppCard :is-link="true" to="/4x4-pll" tag="4x4" tag-class="bg-violet-500/15 text-violet-500"
                     title="4x4 PLL Parity"
                     description="Algoritma untuk mengatasi PLL parity yang unik di Rubik's Cube 4x4." hover
                     show-top-bar>
@@ -79,46 +78,46 @@
                         <span>•</span>
                         <span>Advanced</span>
                     </template>
-                </AppCard>
+                </LazyAppCard>
             </div>
         </section>
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="Notasi Dasar 3x3" />
+            <LazyAlgorithmSectionHeader title="Notasi Dasar 3x3" />
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <NotationCard v-for="notation in basicNotations" :key="notation.symbol" :title="notation.symbol"
+                <LazyNotationCard v-for="notation in basicNotations" :key="notation.symbol" :title="notation.symbol"
                     :description="notation.description" :icon-component="CubeIcon3D"
                     :icon-props="{ notation: notation.symbol }" />
             </div>
         </section>
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="Wide Moves (Gerakan Lebar)" />
+            <LazyAlgorithmSectionHeader title="Wide Moves (Gerakan Lebar)" />
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <NotationCard v-for="notation in wideNotations" :key="notation.symbol" :title="notation.symbol"
+                <LazyNotationCard v-for="notation in wideNotations" :key="notation.symbol" :title="notation.symbol"
                     :description="notation.description" :icon-component="CubeIcon3D"
                     :icon-props="{ notation: notation.symbol }" />
             </div>
         </section>
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="Cube Rotations & Middle Moves" />
+            <LazyAlgorithmSectionHeader title="Cube Rotations & Middle Moves" />
             <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <NotationCard v-for="notation in rotationNotations" :key="notation.symbol" :title="notation.symbol"
+                <LazyNotationCard v-for="notation in rotationNotations" :key="notation.symbol" :title="notation.symbol"
                     :description="notation.description" :icon-component="CubeIcon3D"
                     :icon-props="{ notation: notation.symbol }" />
             </div>
         </section>
 
         <section class="py-12">
-            <AlgorithmSectionHeader title="4x4 Last Two Edge Pairing" />
-            <p class="text-slate-400 mb-6 max-w-3xl">
+            <LazyAlgorithmSectionHeader title="4x4 Last Two Edge Pairing" />
+            <p class="text-slate-600 dark:text-slate-400 mb-6 max-w-3xl">
                 Algoritma untuk menyelesaikan 2 edge terakhir saat edge pairing di 4x4. Gunakan saat tersisa 2 edge yang
                 belum
                 paired.
             </p>
             <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <AlgorithmCard v-for="algo in lastTwoEdgeAlgorithms" :key="algo.name" :algorithm="algo"
+                <LazyAlgorithmCard v-for="algo in lastTwoEdgeAlgorithms" :key="algo.name" :algorithm="algo"
                     :icon-component="CubeIcon4x4" algorithm-type="Notation" icon-size="w-[80px] h-[80px]" />
             </div>
         </section>

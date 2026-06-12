@@ -1,47 +1,47 @@
 <template>
-    <div class="w-full max-w-7xl mx-auto px-2">
-        <AlgorithmPageHeader cube-size="3x3" algorithm-type="F2L Algorithms"
+    <div class="w-full max-w-7xl mx-auto px-6">
+        <LazyAlgorithmPageHeader cube-size="3x3" algorithm-type="F2L Algorithms"
             description="First Two Layer - 41 cases dasar untuk menyelesaikan layer pertama dan kedua secara bersamaan."
             timer-cube-param="3x3" />
 
         <section class="py-12">
-            <AlgorithmSectionHeader :title="sortBy === 'number' ? 'All F2L Cases' : 'Grouped by Categories'"
+            <LazyAlgorithmSectionHeader :title="sortBy === 'number' ? 'All F2L Cases' : 'Grouped by Categories'"
                 :algorithm-count="41">
                 <!-- Sort Buttons -->
-                <div class="flex bg-slate-800/50 p-1 rounded-xl border border-slate-700/50 ml-4">
+                <div class="flex bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl border border-slate-200 dark:border-slate-700/50 ml-4">
                     <button @click="sortBy = 'number'"
-                        :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:text-white']"
+                        :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
                         class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
                         By Number
                     </button>
                     <button @click="sortBy = 'category'"
-                        :class="[sortBy === 'category' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:text-white']"
+                        :class="[sortBy === 'category' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
                         class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
                         By Categories
                     </button>
                 </div>
-            </AlgorithmSectionHeader>
+            </LazyAlgorithmSectionHeader>
 
             <!-- Flat List (By Number) -->
             <div v-if="sortBy === 'number'" class="grid gap-6 py-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-md mx-auto md:max-w-none md:mx-0">
-                <AlgorithmF2LCard v-for="f2l in f2lAlgorithms" :key="f2l.id"
+                <LazyAlgorithmF2LCard v-for="f2l in f2lAlgorithms" :key="f2l.id"
                     :algorithm="{ ...f2l, name: `F2L ${f2l.id}` }" :icon-component="CubeIcon3D" algorithm-type="F2L" />
             </div>
 
             <!-- Grouped List (By Category) -->
             <div v-else class="space-y-12 py-4">
                 <div v-for="group in sortShape" :key="group.sub_title_name" class="space-y-6">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-3">
-                        <span class="h-px flex-1 bg-linear-to-r from-indigo-500/50 to-transparent"></span>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                        <span class="h-px flex-1 bg-linear-to-r from-indigo-500/30 dark:from-indigo-500/50 to-transparent"></span>
                         <span
-                            class="px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm tracking-widest uppercase font-black">
+                            class="px-4 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm tracking-widest uppercase font-black">
                             {{ group.sub_title_name }}
                         </span>
-                        <span class="h-px flex-1 bg-linear-to-l from-indigo-500/50 to-transparent"></span>
+                        <span class="h-px flex-1 bg-linear-to-l from-indigo-500/30 dark:from-indigo-500/50 to-transparent"></span>
                     </h3>
                     <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-md mx-auto md:max-w-none md:mx-0">
                         <template v-for="id in group.list" :key="id">
-                            <AlgorithmF2LCard v-if="getf2lById(id)"
+                            <LazyAlgorithmF2LCard v-if="getf2lById(id)"
                                 :algorithm="{ ...getf2lById(id), name: `F2L ${id}` }" :icon-component="CubeIcon3D"
                                 algorithm-type="F2L" />
                         </template>
@@ -54,7 +54,6 @@
 
 <script setup>
 import CubeIcon3D from '~/components/CubeIcon3D.vue'
-import AlgorithmF2LCard from '~/components/AlgorithmF2LCard.vue'
 
 useSeoMeta({
     title: '3x3 F2L Algorithms - Cube Algorithm',

@@ -9,19 +9,19 @@
                     stroke="#0a0a0f" stroke-width="1.5" />
 
                 <g v-for="(color, i) in sideStickers.back" :key="'b' + i">
-                    <rect v-if="color" :x="i * 33 + 1" y="-12" width="28" height="10" rx="2" :fill="color" />
+                    <rect v-if="color" :x="i * 33 + 1" y="-12" width="28" height="10" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
 
                 <g v-for="(color, i) in sideStickers.front" :key="'f' + i">
-                    <rect v-if="color" :x="i * 33 + 1" y="99" width="28" height="10" rx="2" :fill="color" />
+                    <rect v-if="color" :x="i * 33 + 1" y="99" width="28" height="10" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
 
                 <g v-for="(color, i) in sideStickers.left" :key="'l' + i">
-                    <rect v-if="color" x="-12" :y="i * 33 + 1" width="10" height="28" rx="2" :fill="color" />
+                    <rect v-if="color" x="-12" :y="i * 33 + 1" width="10" height="28" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
 
                 <g v-for="(color, i) in sideStickers.right" :key="'r' + i">
-                    <rect v-if="color" x="99" :y="i * 33 + 1" width="10" height="28" rx="2" :fill="color" />
+                    <rect v-if="color" x="99" :y="i * 33 + 1" width="10" height="28" rx="2" :fill="color" stroke="#0a0a0f" />
                 </g>
 
                 <g v-if="arrows && arrows.length > 0">
@@ -61,7 +61,7 @@ const colors = {
     orange: '#ee8800',
     blue: '#2040d0',
     green: '#11aa00',
-    blank: '#1e293b'
+    blank: 'var(--sticker-blank)'
 }
 
 const topStickers = computed(() => {
@@ -249,9 +249,9 @@ const topStickers = computed(() => {
                 [_, _, y]
             ],
             '34': [
-                [_, _, _],
+                [y, _, y],
                 [y, y, y],
-                [y, _, y]
+                [_, _, _]
             ],
             '35': [
                 [y, _, _],
@@ -595,9 +595,9 @@ const sideStickers = computed(() => {
             },
             '34': {
                 back: [n, y, n],
-                right: [y, n, n],
+                right: [n, n, y],
                 front: [n, y, n],
-                left: [y, n, n],
+                left: [n, n, y],
             },
             '35': {
                 back: [n, y, n],
