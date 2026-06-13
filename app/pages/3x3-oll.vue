@@ -109,7 +109,7 @@ const ollAlgorithms = [
     { id: 49, setup: "F' U' L' U L F L' U' L U' L' U2 L", algorithm: "L' U2 L U L' U L F' L' U' L U F" },
     { id: 50, setup: "F U R U' R' F' R U R' U R U2 R'", algorithm: "R U2 R' U' R U' R' F R U R' U' F'" },
     { id: 51, setup_name: "OLL 48", setup: "F (R U R' U') (R U R' U') F'", algorithm: "f (R U R' U') (R U R' U') f'" },
-    { id: 52, setup: "R U R' U R U2 R' U' f R U R' U' f'", algorithm: "R U R' U R U2 R' U' f R U R' U' f'" },
+    { id: 52, setup: "F R U R' d R' U' R U' R'", algorithm: "R U R' U R d' R U' R' F'" },
     { id: 53, setup: "Same as Algo", algorithm: "r' U' (R U' R') U (R U' R') U2 r" },
     { id: 54, setup: "Same as Algo", algorithm: "r U (R' U R) U' (R' U R) U2 r'" },
     { id: 55, setup: "F R' F' U2' R U R' U R2' U2' R'", algorithm: "R U2 R2 (U' R U' R') U2 (F R F')" },
