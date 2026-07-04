@@ -154,14 +154,14 @@ const topStickers = computed(() => {
                 [_, _, y]
             ],
             '15': [
-                [_, _, _],
+                [y, _, _],
                 [y, y, y],
-                [_, _, y]
+                [_, _, _]
             ],
             '16': [
-                [_, _, _],
+                [_, _, y],
                 [y, y, y],
-                [y, _, _]
+                [_, _, _]
             ],
             '17': [
                 [y, _, _],
@@ -289,9 +289,9 @@ const topStickers = computed(() => {
                 [y, _, y]
             ],
             '42': [
-                [y, _, y],
-                [y, y, _],
-                [_, y, _]
+                [_, y, _],
+                [_, y, y],
+                [y, _, y]
             ],
             '43': [
                 [y, _, _],
@@ -349,9 +349,9 @@ const topStickers = computed(() => {
                 [_, y, _]
             ],
             '54': [
-                [_, y, _],
-                [_, y, y],
-                [_, _, _]
+                [_, _, _],
+                [y, y, _],
+                [_, y, _]
             ],
             '55': [
                 [_, y, _],
@@ -480,15 +480,15 @@ const sideStickers = computed(() => {
                 left: [y, n, n],
             },
             '15': {
-                back: [y, y, n],
+                back: [n, y, n],
                 right: [y, n, n],
-                front: [n, y, n],
+                front: [n, y, y],
                 left: [n, n, y],
             },
             '16': {
-                back: [n, y, y],
+                back: [n, y, n],
                 right: [n, n, y],
-                front: [n, y, n],
+                front: [y, y, n],
                 left: [y, n, n],
             },
             '17': {
@@ -642,10 +642,10 @@ const sideStickers = computed(() => {
                 left: [n, n, n],
             },
             '42': {
-                back: [n, y, n],
-                right: [n, y, n],
-                front: [y, n, y],
-                left: [n, n, n],
+                back: [y, n, y],
+                right: [n, n, n],
+                front: [n, y, n],
+                left: [n, y, n],
             },
             '43': {
                 back: [n, y, n],
@@ -714,10 +714,10 @@ const sideStickers = computed(() => {
                 left: [y, y, y],
             },
             '54': {
-                back: [n, n, n],
-                right: [y, n, y],
-                front: [n, y, n],
-                left: [y, y, y],
+                back: [n, y, n],
+                right: [y, y, y],
+                left: [y, n, y],
+                front: [n, n, n],
             },
             '55': {
                 back: [n, n, n],
