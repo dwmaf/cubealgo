@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'dark': isDark }" class="min-h-screen flex flex-col">
+  <div :class="{ 'dark': isDark }" class="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50">
     <header
       class="sticky top-0 z-50 py-4 bg-white/85 dark:bg-bg-primary/85 backdrop-blur-xl border-b border-slate-200 dark:border-indigo-500/15">
       <div class="w-full max-w-7xl mx-auto px-6">
@@ -365,6 +365,7 @@ onMounted(() => {
   } else {
     isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
   }
+  updateDocumentClass()
 
   // Add listener to close dropdowns on outside click
   window.addEventListener('click', closeDropdowns)

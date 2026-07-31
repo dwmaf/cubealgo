@@ -58,7 +58,7 @@
   }
 
   body {
-    @apply font-sans min-h-screen leading-relaxed bg-white text-slate-900 dark:bg-bg-primary dark:text-slate-50;
+    @apply font-sans min-h-screen leading-relaxed;
   }
 
   /* Background Pattern */
