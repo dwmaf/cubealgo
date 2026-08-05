@@ -6,31 +6,49 @@
 
         <section class="py-12">
             <LazyAlgorithmSectionHeader :title="sortBy === 'number' ? 'All F2L Cases' : 'Grouped by Categories'"
-                :algorithm-count="41">
-                <!-- Sort Buttons -->
-                <div class="flex bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl border border-slate-200 dark:border-slate-700/50 ml-4">
-                    <button @click="sortBy = 'number'"
-                        :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
-                        class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
-                        By Number
+                :algorithm-count="unMemorizedOnly ? filteredAlgorithms.length : 41">
+                <!-- Controls -->
+                <div class="flex items-center gap-3 flex-wrap">
+                    <!-- Sort Buttons -->
+                    <div class="flex bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl border border-slate-200 dark:border-slate-700/50">
+                        <button @click="sortBy = 'number'"
+                            :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
+                            class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
+                            By Number
+                        </button>
+                        <button @click="sortBy = 'category'"
+                            :class="[sortBy === 'category' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
+                            class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
+                            By Categories
+                        </button>
+                    </div>
+
+                    <!-- Unmemorized Filter -->
+                    <button @click="unMemorizedOnly = !unMemorizedOnly"
+                        :class="[unMemorizedOnly ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 border-indigo-500' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-slate-700/50']"
+                        class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-slate-100 dark:bg-slate-800/50 border">
+                        {{ unMemorizedOnly ? 'Showing Unmemorized Only' : 'Unmemorized Only' }}
                     </button>
-                    <button @click="sortBy = 'category'"
-                        :class="[sortBy === 'category' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
-                        class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
-                        By Categories
+
+                    <!-- Hide Solution Toggle -->
+                    <button @click="hideSolution = !hideSolution"
+                        :class="[hideSolution ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 border-indigo-500' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-slate-700/50']"
+                        class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-slate-100 dark:bg-slate-800/50 border">
+                        {{ hideSolution ? 'Solution Hidden' : 'Hide Solution' }}
                     </button>
                 </div>
             </LazyAlgorithmSectionHeader>
 
             <!-- Flat List (By Number) -->
             <div v-if="sortBy === 'number'" class="grid gap-6 py-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-md mx-auto md:max-w-none md:mx-0">
-                <LazyAlgorithmF2LCard v-for="f2l in f2lAlgorithms" :key="f2l.id"
-                    :algorithm="{ ...f2l, name: `F2L ${f2l.id}` }" :icon-component="CubeIcon3D" algorithm-type="F2L" />
+                <LazyAlgorithmF2LCard v-for="f2l in filteredAlgorithms" :key="f2l.id"
+                    :algorithm="{ ...f2l, name: `F2L ${f2l.id}` }" :icon-component="CubeIcon3D" algorithm-type="F2L"
+                    :hide-solution="hideSolution" />
             </div>
 
             <!-- Grouped List (By Category) -->
             <div v-else class="space-y-12 py-4">
-                <div v-for="group in sortShape" :key="group.sub_title_name" class="space-y-6">
+                <div v-for="group in filteredSortShape" :key="group.sub_title_name" class="space-y-6">
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
                         <span class="h-px flex-1 bg-linear-to-r from-indigo-500/30 dark:from-indigo-500/50 to-transparent"></span>
                         <span
@@ -43,7 +61,7 @@
                         <template v-for="id in group.list" :key="id">
                             <LazyAlgorithmF2LCard v-if="getf2lById(id)"
                                 :algorithm="{ ...getf2lById(id), name: `F2L ${id}` }" :icon-component="CubeIcon3D"
-                                algorithm-type="F2L" />
+                                algorithm-type="F2L" :hide-solution="hideSolution" />
                         </template>
                     </div>
                 </div>
@@ -398,6 +416,20 @@ const f2lAlgorithms = [
 ]
 
 const sortBy = ref('number')
+const unMemorizedOnly = ref(false)
+const hideSolution = ref(false)
+
+const filteredAlgorithms = computed(() => {
+    if (!unMemorizedOnly.value) return f2lAlgorithms
+    return f2lAlgorithms.filter(f2l => unMemorized.includes(f2l.id))
+})
+
+const filteredSortShape = computed(() => {
+    if (!unMemorizedOnly.value) return sortShape
+    return sortShape
+        .map(group => ({ ...group, list: group.list.filter(id => unMemorized.includes(id)) }))
+        .filter(group => group.list.length > 0)
+})
 
 const getf2lById = (id) => {
     return f2lAlgorithms.find(f2l => f2l.id === id)
@@ -411,5 +443,7 @@ const sortShape = [
     { sub_title_name: "Edge in Slot", list: [31, 32, 33, 34, 35, 36] },
     { sub_title_name: "Edge in Slot", list: [37, 38, 39, 40, 41] },
 ]
+
+const unMemorized = [5,6,15,16,23,24,29,30, 35, 36,40,41]
 
 </script>

@@ -31,7 +31,7 @@
 
             <div class="text-sm p-2 rounded-xl break-all leading-relaxed font-mono bg-slate-50 dark:bg-bg-primary text-slate-800 dark:text-indigo-100 border border-slate-200 dark:border-indigo-500/20 shadow-inner"
                 :class="algorithmClass">
-                {{ algorithm.algorithm }}
+                {{ props.hideSolution ? maskAlgo(algorithm.algorithm) : algorithm.algorithm }}
             </div>
         </div>
     </div>
@@ -64,6 +64,14 @@ const props = defineProps({
     iconSize: {
         type: String,
         default: 'w-[80px] h-[80px]'
+    },
+    hideSolution: {
+        type: Boolean,
+        default: false
     }
 })
+
+const maskAlgo = (algo) => {
+    return algo.split(/\s+/).map(token => '•'.repeat(token.length)).join(' ')
+}
 </script>

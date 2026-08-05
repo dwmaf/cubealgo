@@ -54,12 +54,14 @@
                     <div class="group/algo relative">
                         <div
                             class="text-sm p-3 pt-4 rounded-xl break-all leading-relaxed font-mono bg-slate-50 dark:bg-bg-primary text-slate-800 dark:text-indigo-100 border border-slate-200 dark:border-indigo-500/20 shadow-inner group-hover/algo:border-indigo-500/40 transition-colors">
-                            {{ algo }}
+                            {{ props.hideSolution ? maskAlgo(algo) : algo }}
                         </div>
 
                         <!-- Mini Copy Button (Optional Future Feature Decorator) -->
                         <div class="absolute top-2 right-2 opacity-0 group-hover/algo:opacity-100 transition-opacity">
-                            <div class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
+                            <div v-if="props.hideSolution"
+                                class="w-2 h-2 rounded-full bg-amber-500 animate-pulse" :title="'Solution hidden'"></div>
+                            <div v-else class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
                         </div>
                     </div>
                 </div>
@@ -106,6 +108,10 @@ const props = defineProps({
     iconSize: {
         type: String,
         default: 'w-[90px] h-[90px]'
+    },
+    hideSolution: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -136,4 +142,8 @@ const currentAlgos = computed(() => {
     // Fallback for their example structure {"algo1", "algo2"} which might be an object in JS
     return Object.values(data)
 })
+
+const maskAlgo = (algo) => {
+    return algo.split(/\s+/).map(token => '•'.repeat(token.length)).join(' ')
+}
 </script>

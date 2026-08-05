@@ -5,25 +5,47 @@
             timer-cube-param="3x3" />
 
         <section class="py-12">
-            <LazyAlgorithmSectionHeader :title="sortBy === 'number' ? 'All OLL Cases' : 'Grouped by Shape'"
+            <LazyAlgorithmSectionHeader
+                :title="sortBy === 'number' ? 'All OLL Cases' : sortBy === 'preference' ? 'My Preference Order' : 'Grouped by Shape'"
                 :algorithm-count="57">
-                <div class="flex bg-slate-100 dark:bg-slate-800/50 ml-4 p-1 rounded-xl border border-slate-200 dark:border-slate-700/50">
-                    <button @click="sortBy = 'number'"
-                        :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
-                        class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
-                        By Number
-                    </button>
-                    <button @click="sortBy = 'shape'"
-                        :class="[sortBy === 'shape' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
-                        class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
-                        By Shape
+                <div class="flex items-center gap-3 flex-wrap">
+                    <div class="flex bg-slate-100 dark:bg-slate-800/50 ml-4 p-1 rounded-xl border border-slate-200 dark:border-slate-700/50">
+                        <button @click="sortBy = 'number'"
+                            :class="[sortBy === 'number' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
+                            class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
+                            By Number
+                        </button>
+                        <button @click="sortBy = 'shape'"
+                            :class="[sortBy === 'shape' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
+                            class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
+                            By Shape
+                        </button>
+                        <button @click="sortBy = 'preference'"
+                            :class="[sortBy === 'preference' ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white']"
+                            class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300">
+                            By Preference
+                        </button>
+                    </div>
+
+                    <!-- Hide Solution Toggle -->
+                    <button @click="hideSolution = !hideSolution"
+                        :class="[hideSolution ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 border-indigo-500' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-slate-700/50']"
+                        class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 bg-slate-100 dark:bg-slate-800/50 border">
+                        {{ hideSolution ? 'Solution Hidden' : 'Hide Solution' }}
                     </button>
                 </div>
             </LazyAlgorithmSectionHeader>
 
             <div v-if="sortBy === 'number'" class="grid gap-4 py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <LazyAlgorithmCard v-for="oll in ollAlgorithms" :key="oll.id" :algorithm="{ ...oll, name: `OLL ${oll.id}` }"
-                    :icon-component="CubeIcon3x3" algorithm-type="OLL" />
+                    :icon-component="CubeIcon3x3" algorithm-type="OLL" :hide-solution="hideSolution" />
+            </div>
+
+            <!-- Preference List (My Order) -->
+            <div v-else-if="sortBy === 'preference'" class="grid gap-4 py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                <LazyAlgorithmCard v-for="oll in preferenceOrdered" :key="oll.id"
+                    :algorithm="{ ...oll, name: `OLL ${oll.id}` }" :icon-component="CubeIcon3x3" algorithm-type="OLL"
+                    :hide-solution="hideSolution" />
             </div>
 
             <!-- Grouped List (By Shape) -->
@@ -40,7 +62,7 @@
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                         <template v-for="id in group.list" :key="id">
                             <LazyAlgorithmCard v-if="getOllById(id)" :algorithm="{ ...getOllById(id), name: `OLL ${id}` }"
-                                :icon-component="CubeIcon3x3" algorithm-type="OLL" />
+                                :icon-component="CubeIcon3x3" algorithm-type="OLL" :hide-solution="hideSolution" />
                         </template>
                     </div>
                 </div>
@@ -117,10 +139,15 @@ const ollAlgorithms = [
     { id: 57, setup_name: "OLL 28", setup: "r U R' U' M U R U' R'", algorithm: "(R U R' U') M' (U R U' r')" },
 ]
 const sortBy = ref('number')
+const hideSolution = ref(false)
 
 const getOllById = (id) => {
     return ollAlgorithms.find(oll => oll.id === id)
 }
+
+const preferenceOrdered = computed(() => {
+    return myPreferences.map(id => getOllById(id)).filter(Boolean)
+})
 
 const sortShape = [
     { sub_title_name: "Dot", list: [1, 2, 3, 4, 17, 18, 19, 20] },
@@ -144,5 +171,7 @@ const ReverseSetup = [
     { sub_title_name: "Fifth Reverse", list: [48, 49, 50, 51] },
     { sub_title_name: "Same as Algorithm", list: [2, 21, 22, 52, 53, 54] },
 ]
+
+const myPreferences = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28, 57, 29,30, 41, 42, 31,32,39,40, 43,44,47,48,49,50,53,54,51,52, 55,56, 33, 37, 35, 45, 36,  38, 34, 46]
 
 </script>
